@@ -1,3 +1,3 @@
-# ITS - Project Work
+# ITS - Project Work S&S
 
-Esempi ed esercizi per il modulo "Projwect Work" - primo anno, 2018
+
