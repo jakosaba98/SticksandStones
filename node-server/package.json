@@ -1,0 +1,12 @@
+{
+    "name": "server_trasporto_pubblico",
+    "description": "Server che risponde a tutte le chiamate http API e del sito",
+    "authors": "S&S - Stick And Stones",
+    "version": "1.0.0",
+    "main": "server.js",
+    "dependencies": {
+        "fastify": "^2.3.0"
+    },
+    "repository": {"type": "javascript","url":"https://github.com/jakosaba98/readersender"},
+    "license": "CC"
+}
