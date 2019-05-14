@@ -3,4 +3,5 @@ const fastify = require("fastify")({
 });
 
 fastify.register(require("./api"),{ prefix: '/api' });
-fastify.listen(80);
+fastify.listen(80,'0.0.0.0');
+// change 0.0.0.0 to static ip address if possible!!
