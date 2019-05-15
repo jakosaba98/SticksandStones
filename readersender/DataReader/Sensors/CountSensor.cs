@@ -24,7 +24,7 @@ namespace DataReader.Sensors
 
             if (d.GetValue()=="True")
             {
-                if (random.Next(1, 3) == 1) //33% che un passggero salga
+                if (random.Next(1, 3) == 1) //33% che un passeggero salga
                 {
                     GetOn();
                 }
