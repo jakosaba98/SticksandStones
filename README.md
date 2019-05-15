@@ -5,4 +5,5 @@ Inizialmente avviare redis, poi eseguire DataReader (e stoppare a piacere una vo
 poi eseguire DataSender, che prenderà tutti i dati e li memorizzerà temporaneamente sulla pila.
 
 Parti successive ancora da effettuare (infatti i dati vanno dispersi una volta chiuso il programma)
+Programma momentaneamente non compilabile per un'aggiunta di un codice sample
 --
