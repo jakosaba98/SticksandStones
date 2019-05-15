@@ -36,7 +36,7 @@ namespace DataSender
 
                     using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                     {
-                        string json = ; //decidere se passare "data" interamente e poi sezionare i dati alla fine 
+                        string json = data ; //decidere se passare "data" interamente e poi sezionare i dati alla fine 
 
                         streamWriter.Write(json);
                         streamWriter.Flush();
