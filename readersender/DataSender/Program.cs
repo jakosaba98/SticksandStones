@@ -17,11 +17,14 @@ namespace DataSender
             // configure Redis
             var redis = new RedisClient("127.0.0.1");
 
+            var ip = "54.171.94.37"; //ip ec2
+            var port = "3000";
+
             while (true)
             {
                 //Console.WriteLine(redis.BLPop(30, "sensors_data"));
 
-                if (CheckForConnection())
+                if (CheckForConnection(ip))
                 {
                     // send value to remote API
                     var data = redis.BLPop(30, "sensors_data"); //dentro per non perdere i dati
@@ -30,13 +33,13 @@ namespace DataSender
                     //SAMPLE DI CONNESSIONE PER INVIO DATI POST
                     //POI SPOSTIAMO I SETTAGGI FUORI DAL CICLO
 
-                    var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://54.171.94.37::porta");
+                    var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://"+ip+"::"+port);
                     httpWebRequest.ContentType = "application/json";
                     httpWebRequest.Method = "POST";
 
                     using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
                     {
-                        string json = data ; //decidere se passare "data" interamente e poi sezionare i dati alla fine 
+                        string json = data ; //decidere se passare "data" interamente e poi sezionare i dati alla fine oppure altro
 
                         streamWriter.Write(json);
                         streamWriter.Flush();
@@ -58,9 +61,8 @@ namespace DataSender
                 //System.Threading.Thread.Sleep(1000);//1 sec ma non funziona per l'overflow
             }
         }
-        public static bool CheckForConnection()
+        public static bool CheckForConnection(string ip)
         {
-            var ip = "54.171.94.37"; //ip ec2
             try
             {
                 using (var client = new WebClient())
