@@ -30,8 +30,10 @@ namespace DataReader
             {
                 var data = ToJSON(id);
                 Console.WriteLine(data);
+
                 // push to redis queue
                 redis.LPush("sensors_data", data);
+
                 foreach (Sensor sensor in sensors)
                 {
                     data = sensor.ToJson();

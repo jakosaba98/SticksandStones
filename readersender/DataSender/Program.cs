@@ -17,24 +17,26 @@ namespace DataSender
 
             while (true)
             {
-                // read from Redis queue
-                Console.WriteLine(redis.BLPop(30, "sensors_data"));
+                //Console.WriteLine(redis.BLPop(30, "sensors_data"));
 
-                if (CheckForInternetConnection())
+                if (CheckForConnection())
                 {
                     // send value to remote API
+                    var data = redis.BLPop(30, "sensors_data");
                 }
 
                 // TODO...
+
                 //System.Threading.Thread.Sleep(1000);//1 sec ma non funziona per l'overflow
             }
         }
-        public static bool CheckForInternetConnection()
+        public static bool CheckForConnection()
         {
+            var ip = "54.171.94.37"; //ip ec2
             try
             {
                 using (var client = new WebClient())
-                using (client.OpenRead("http://clients3.google.com/generate_204"))
+                using (client.OpenRead("http://"+ip+"/api/ping"))
                 {
                     return true;
                 }
