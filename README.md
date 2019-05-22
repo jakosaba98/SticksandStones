@@ -82,10 +82,10 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 
 ## Authors
 
-* **Lorenzo Tommasiello** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-* **Giacomo Saba** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-* **Gianluca Pistoia** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
-* **Pietro Wendler** - *Initial work* - [PurpleBooth](https://github.com/PurpleBooth)
+* **Lorenzo Tommasiello** - *Capo della baracca* - [SticksandStones](https://github.com/ENSOO)
+* **Giacomo Saba** - *Ichnusa* - [SticksandStones](https://github.com/jakosaba98)
+* **Gianluca Pistoia** - *Pazzo* - [SticksandStones](https://github.com/SticksandStones)
+* **Pietro Wendler** - *Scemo del villaggio* - [SticksandStones](https://github.com/PietroWendler)
 
 
 See also the list of [contributors](https://github.com/your/project/contributors) who participated in this project.
