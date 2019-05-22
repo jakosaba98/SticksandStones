@@ -1,0 +1,8 @@
+{
+    "ipaddress": "127.0.0.1",
+    "port": 8086,
+    "username":"SandSAdmin",
+    "password": "logPSTW",
+    "databasename": "local_storage",
+    "measurement": "public_transport"
+}

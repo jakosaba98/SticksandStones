@@ -5,8 +5,12 @@
     "version": "1.0.0",
     "main": "server.js",
     "dependencies": {
-        "fastify": "^2.3.0"
+        "fastify": "^2.3.0",
+        "influxdb-nodejs": "^3.0.0"
     },
-    "repository": {"type": "javascript","url":"https://github.com/jakosaba98/readersender"},
+    "repository": {
+        "type": "javascript",
+        "url": "https://github.com/jakosaba98/readersender"
+    },
     "license": "CC"
 }

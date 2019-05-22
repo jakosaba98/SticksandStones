@@ -1,15 +1,12 @@
-const Influx = require("influxdb-nodejs");
-const databasename = "local_storage";
-const ipaddress = "127.0.0.1";// questo script verrà eseguito sulla macchina remota, da cambiare in 127.0.0.1
-const measurement = "public_transport";
-const u = "SandSAdmin";
-const p = "logPSTW";
-const connString = "http://"+u+":"+p+"@"+ipaddress+":8086/"+databasename;
+const Influx = require('influxdb-nodejs');
+const config = require('../config.json');
+
+const connString = "http://"+config.username+":"+config.password+"@"+config.ipaddress+":"+config.port+"/"+config.databasename;
 
 const routes = async (fastify, options) => {
     fastify.get("/",async (req,res) => {
         const client = new Influx(connString);
-        client.query(measurement)
+        client.query(config.measurement)
                 .set({limit: 20})//last 20 rows
                 .then((result)=>res.send(result.results[0].series[0]))
                 .catch((err)=>res.status(500).send(err));
@@ -17,7 +14,7 @@ const routes = async (fastify, options) => {
     fastify.get("/:id",async (req,res) => {
         const client = new Influx(connString);
         let id_req = parseInt(req.params.id);
-        client.query(measurement)
+        client.query(config.measurement)
                 .where({
                     id: id_req
                 })
@@ -27,7 +24,7 @@ const routes = async (fastify, options) => {
     })
     fastify.post("/",async (req,res) => {
         const client = new Influx(connString);
-        client.write(measurement)
+        client.write(config.measurement)
                 .tag({
                     id: req.body.id
                 })
