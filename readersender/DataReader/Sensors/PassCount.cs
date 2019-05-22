@@ -30,7 +30,7 @@ namespace DataReader.Sensors
         }
         override public string ToJson()
         {
-            return "{\"" + vett[0].GetName() + "\": " + this.GetValue() + "}";
+            return "\n\"" + vett[0].GetName() + "\": " + this.GetValue() + "\n}";
         }
     }
 }
