@@ -1,5 +1,8 @@
 ﻿using System;
+using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
+using System.IO;
 using System.Linq;
 using System.Net;
 using System.Text;
@@ -10,31 +13,69 @@ namespace DataSender
 {
     class Program
     {
+        [Obsolete]
         static void Main(string[] args)
         {
             // configure Redis
             var redis = new RedisClient("127.0.0.1");
 
+            var config= GetConfig();
+            var dns = config[0]; //dns pubblico statico ec2
+            var port = config[1];
+
             while (true)
             {
-                // read from Redis queue
                 Console.WriteLine(redis.BLPop(30, "sensors_data"));
 
-                if (CheckForInternetConnection())
+                //SAMPLE DI CONNESSIONE PER INVIO DATI POST
+                /*
+                if (CheckForConnection(dns))
                 {
                     // send value to remote API
+                    var data = redis.BLPop(30, "sensors_data"); //dentro per non perdere i dati
+                    Console.WriteLine(redis.BLPop(30, "sensors_data"));
+
+
+                    //POI SPOSTIAMO I SETTAGGI FUORI DAL CICLO
+
+                    var httpWebRequest = (HttpWebRequest)WebRequest.Create(dns+"::"+port);
+                    httpWebRequest.ContentType = "application/json";
+                    httpWebRequest.Method = "POST";
+
+                    using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
+                    {
+                        string json = data ; //decidere se passare "data" interamente e poi sezionare i dati alla fine oppure altro
+
+                        streamWriter.Write(json);
+                        streamWriter.Flush();
+                        streamWriter.Close();
+                    }
+
+                    var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                    {
+                        var result = streamReader.ReadToEnd();
+                    }
+                    
+                    
+
+
+
                 }
+                */
+
 
                 // TODO...
+
                 //System.Threading.Thread.Sleep(1000);//1 sec ma non funziona per l'overflow
             }
         }
-        public static bool CheckForInternetConnection()
+        public static bool CheckForConnection(string dns)
         {
             try
             {
                 using (var client = new WebClient())
-                using (client.OpenRead("http://clients3.google.com/generate_204"))
+                using (client.OpenRead(dns+"/api/ping")) //richiamare api ping
                 {
                     return true;
                 }
@@ -43,6 +84,15 @@ namespace DataSender
             {
                 return false;
             }
+        }
+
+        [Obsolete]
+        public static string[] GetConfig()
+        {
+            string dns = ConfigurationManager.AppSettings["dns"];
+            string port = ConfigurationManager.AppSettings["port"];
+            string[] config = {dns, port };
+            return config;
         }
 
     }

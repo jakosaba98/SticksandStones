@@ -17,17 +17,23 @@ namespace DataReader.Sensors
             return ""+passengers;
         }
         public override string GetName() => "count";
+
         public void Controller()
         {
             Random random = new Random();
-            if (random.Next(1, 3) == 1 && d.GetValue()=="True")
+
+            if (d.GetValue()=="True")
             {
-                GetOn();
-            }
-            else
-            if (random.Next(1, 4) == 1 && d.GetValue()=="True" && passengers>0)
-            {
-                GetOff();
+                if (random.Next(1, 3) == 1) //33% che un passeggero salga
+                {
+                    GetOn();
+                }
+
+                if (random.Next(1, 4) == 1 && passengers > 0) //25% che un passeggero scenda
+                {
+                    GetOff();
+                }
+
             }
         }
         public void GetOn() => passengers++;
