@@ -1,20 +1,29 @@
 # SticksandStones Repo for Project Work
+https://drive.google.com/drive/u/1/folders/1Gt7nth7STXAV-lVaZlp9KIrFQLehJSzH
+https://docs.google.com/document/d/1GAWGeCleCg3RyTotIhEhw6YQjz-3LKSQkfVPz0pV3T4/edit
+https://trello.com/b/1Z6gDGxO/dam-ss
 
-Here there are all files of this project 
+(Here there are all files of this project) 
 
 ## Getting Started
-
+S&S is our new Startup created to analyze and improve the company's managment and keeping customer's benefit optimal.
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
-What things you need to install the software and how to install them
+SO Android, iOS, Windows
+Wi-Fi
+GPS location
+Personal Account
+(What things you need to install the software and how to install them)
 
 ```
-Give examples
+
+
 ```
 
 ### Installing
+
 
 A step by step series of examples that tell you how to get a development env running
 
@@ -84,4 +93,5 @@ This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md
 
 * Hat tip to anyone whose code was used
 * Inspiration
+* Creativity
 * etc
