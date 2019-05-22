@@ -1,9 +1,7 @@
 # SticksandStones Repo for Project Work
-https://drive.google.com/drive/u/1/folders/1Gt7nth7STXAV-lVaZlp9KIrFQLehJSzH
-https://docs.google.com/document/d/1GAWGeCleCg3RyTotIhEhw6YQjz-3LKSQkfVPz0pV3T4/edit
-https://trello.com/b/1Z6gDGxO/dam-ss
+[Dashboard on Trello](https://trello.com/b/1Z6gDGxO/dam-ss)
 
-(Here there are all files of this project) 
+Here there are all files of this project
 
 ## Getting Started
 S&S is our new Startup created to analyze and improve the company's managment and keeping customer's benefit optimal.
@@ -11,10 +9,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-SO Android, iOS, Windows,
-Wi-Fi,
+OS Android (from 4.1), iOS or Windows, (we need to run some tests! This is an estimation)
+A browser or ours app,
+An Internet connection,
 GPS location,
-Personal Account
 
 (What things you need to install the software and how to install them)
 
@@ -44,64 +42,41 @@ End with an example of getting some data out of the system or using it for a lit
 
 ## Running the tests
 
-Explain how to run the automated tests for this system
+We will develop an automated system for running tests
 
-### Break down into end to end tests
+It's important to test API calls and correct insert of data
 
-Explain what these tests test and why
-
+Test a connection to DB (a correct response returns code 204)
 ```
-Give an example
-```
-
-### And coding style tests
-
-Explain what these tests test and why
-
-```
-Give an example
+curl http://sandsloadbalancer-620921771.eu-west-1.elb.amazonaws.com/ping
 ```
 
 ## Deployment
 
-Add additional notes about how to deploy this on a live system
+We will write a guide and publish the files needed and where to save them
 
 ## Built With
 
-* AWS Amazon EC2, Load Balancer
-* Visual Studio Code [JavaScript]
-* Database Influx
-* HTML,CSS
-* 
-* [Dropwizard](http://www.dropwizard.io/1.0.2/docs/) - The web framework used
-* [Maven](https://maven.apache.org/) - Dependency Management
-* [ROME](https://rometools.github.io/rome/) - Used to generate RSS Feeds
+* [AWS](https://aws.amazon.com) Amazon EC2, Load Balancer - Server where we store data and website
+* [Visual Studio Code](https://code.visualstudio.com/) - Framework used to write HTML, CSS, Javascript code
+* [InfluxDB](https://www.influxdata.com/) - Database for storing autobus data
 
 
 ## Contributing
 
-Please read [CONTRIBUTING.md](https://gist.github.com/PurpleBooth/b24679402957c63ec426) for details on our code of conduct, and the process for submitting pull requests to us.
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/your/project/tags). 
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/jakosaba98/SticksandStones/tags). 
 
 ## Authors
 
-* **Lorenzo Tommasiello** - *Capo della baracca* - [SticksandStones](https://github.com/ENSOO)
-* **Giacomo Saba** - *Ichnusa* - [SticksandStones](https://github.com/jakosaba98)
-* **Gianluca Pistoia** - *Pazzo* - [SticksandStones](https://github.com/SticksandStones)
-* **Pietro Wendler** - *Scemo del villaggio* - [SticksandStones](https://github.com/PietroWendler)
+* **Lorenzo Tomasello** - *Server Manager* - [SticksandStones](https://github.com/ENSOO)
+* **Giacomo Saba** - *C#* - [SticksandStones](https://github.com/jakosaba98)
+* **Gianluca Pistoia** - *InfluxDB, HTML & Style* - [SticksandStones](https://github.com/gianlucapistoia)
+* **Pietro Wendler** - *Github & Trello Manager* - [SticksandStones](https://github.com/PietroWendler)
 
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE.md](LICENSE.md) file for details
-
-## Acknowledgments
-
-* Hat tip to anyone whose code was used
-* Inspiration
-* Creativity
-* Forefront technology
-* etc
+This project is licensed under the MIT License - see the [LICENSE.md](https://en.wikipedia.org/wiki/MIT_License) for details
