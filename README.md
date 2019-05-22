@@ -11,10 +11,11 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-SO Android, iOS, Windows
-Wi-Fi
-GPS location
+SO Android, iOS, Windows,
+Wi-Fi,
+GPS location,
 Personal Account
+
 (What things you need to install the software and how to install them)
 
 ```
