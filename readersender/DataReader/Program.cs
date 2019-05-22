@@ -5,16 +5,19 @@ using System.Text;
 using System.Threading.Tasks;
 using DataReader.Sensors;
 using CSRedis;
+using System.Configuration;
 
 namespace DataReader
 {
     class Program
     {
+        [Obsolete]
         static void Main(string[] args)
         {
-            const int id = 3; // maybe get it from config file in bus
+            var config= GetConfig();
+            int id = Convert.ToInt32(config);
+
             var d = new DoorSensor();
-            int[] a = { 1, 2 };
             // init sensors
             List<ISensor> sensors = new List<ISensor>
             {
@@ -46,6 +49,13 @@ namespace DataReader
 
             }
         }
-        static string ToJSON(int id) => "{\"id:\":\""+id+"\"}";
+        static string ToJSON(int id) => "{\"id:\": "+id+" }";
+
+        [Obsolete]
+        public static string GetConfig()
+        {
+            string idbus = ConfigurationManager.AppSettings["idbus"];
+            return idbus;
+        }
     }
 }

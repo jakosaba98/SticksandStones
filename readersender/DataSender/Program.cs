@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections;
 using System.Collections.Generic;
+using System.Configuration;
 using System.IO;
 using System.Linq;
 using System.Net;
@@ -12,28 +13,32 @@ namespace DataSender
 {
     class Program
     {
+        [Obsolete]
         static void Main(string[] args)
         {
             // configure Redis
             var redis = new RedisClient("127.0.0.1");
 
-            var ip = "54.171.94.37"; //ip ec2
-            var port = "3000";
+            var config= GetConfig();
+            var dns = config[0]; //dns pubblico statico ec2
+            var port = config[1];
 
             while (true)
             {
-                //Console.WriteLine(redis.BLPop(30, "sensors_data"));
+                Console.WriteLine(redis.BLPop(30, "sensors_data"));
 
-                if (CheckForConnection(ip))
+                //SAMPLE DI CONNESSIONE PER INVIO DATI POST
+                /*
+                if (CheckForConnection(dns))
                 {
                     // send value to remote API
                     var data = redis.BLPop(30, "sensors_data"); //dentro per non perdere i dati
+                    Console.WriteLine(redis.BLPop(30, "sensors_data"));
 
 
-                    //SAMPLE DI CONNESSIONE PER INVIO DATI POST
                     //POI SPOSTIAMO I SETTAGGI FUORI DAL CICLO
 
-                    var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://"+ip+"::"+port);
+                    var httpWebRequest = (HttpWebRequest)WebRequest.Create(dns+"::"+port);
                     httpWebRequest.ContentType = "application/json";
                     httpWebRequest.Method = "POST";
 
@@ -51,22 +56,26 @@ namespace DataSender
                     {
                         var result = streamReader.ReadToEnd();
                     }
+                    
+                    
 
 
 
                 }
+                */
+
 
                 // TODO...
 
                 //System.Threading.Thread.Sleep(1000);//1 sec ma non funziona per l'overflow
             }
         }
-        public static bool CheckForConnection(string ip)
+        public static bool CheckForConnection(string dns)
         {
             try
             {
                 using (var client = new WebClient())
-                using (client.OpenRead("http://"+ip+"/api/ping")) //richiamare api ping
+                using (client.OpenRead(dns+"/api/ping")) //richiamare api ping
                 {
                     return true;
                 }
@@ -75,6 +84,15 @@ namespace DataSender
             {
                 return false;
             }
+        }
+
+        [Obsolete]
+        public static string[] GetConfig()
+        {
+            string dns = ConfigurationManager.AppSettings["dns"];
+            string port = ConfigurationManager.AppSettings["port"];
+            string[] config = {dns, port };
+            return config;
         }
 
     }
