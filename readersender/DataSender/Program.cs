@@ -23,7 +23,7 @@ namespace DataSender
             var dns = config[0]; //dns pubblico statico ec2
             var port = config[1];
 
-            //autenticazione e connessione macchina
+            
             
 
             while (true)
@@ -33,30 +33,30 @@ namespace DataSender
                 
                 if (CheckForConnection(dns))
                 {
+                    //autenticazione e connessione macchina
                     var httpWebRequest = (HttpWebRequest)WebRequest.Create(dns+"/api");
                     httpWebRequest.ContentType = "application/json";
                     httpWebRequest.Method = "POST";
 
                     // send value to remote API
                     var data = redis.BLPop(30, "sensors_data"); //dentro per non perdere i dati
-                    
-                    //flusso
-                    using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-                    {
-                        streamWriter.Write(data);
-                        Console.WriteLine(data);
-                        //streamWriter.Flush();
-                        //streamWriter.Close();
-                    }
 
-                   /*
-                    var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                    {
-                      var result = streamReader.ReadToEnd();
-                        Console.WriteLine(result);
-                    }
-                    */
+                    //flusso
+                    var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream());
+
+                    streamWriter.Write(data);
+                    Console.WriteLine(data);
+                    streamWriter.Flush();
+                    streamWriter.Close();
+
+                    /*
+                     var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                     using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                     {
+                       var result = streamReader.ReadToEnd();
+                         Console.WriteLine(result);
+                     }
+                     */
                 }
 
                 //System.Threading.Thread.Sleep(1000);//1 sec ma non funziona per l'overflow
