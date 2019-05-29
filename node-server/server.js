@@ -1,6 +1,14 @@
 const fastify = require("fastify")({
     ignoreTrailingSlash: true
 });
+const FastifySession = require('fastify-session-sets');
+
+fastify.register(require('fastify-cookie')).register(FastifySession, {
+    references: {
+      user_id: {},
+      auth: {}
+    }
+  });
 
 fastify.get("/",async (req,res) => {
     res.send();
