@@ -6,13 +6,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- Web Page for login
-- Configuration file outside code
+- Web Page for login and registration
 
 ### Changed
 
 ## 2019-05-22
 ### Added
+- Configuration file outside code
 
 ### Changed
 - Updated README.md (using a [sample](https://gist.github.com/PurpleBooth/109311bb0361f32d87a2))
+
+
+## 2019-05-29
+### Added
+- API for login, session manager in fastify
+- Postgres database for users
+
+### Changed
