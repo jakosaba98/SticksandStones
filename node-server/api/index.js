@@ -28,7 +28,7 @@ const routes = async (fastify, options) => {
                 .then((result)=>res.send(result.results[0].series))
                 .catch((err)=>res.status(500).send(err));
     })
-    fastify.post("/",async (req,res) => {
+    fastify.post("/",{preValidation: [fastify.authenticate]},async (req,res) => {
         const client = new Influx(connString);
         client.write(config.measurement)
                 .tag({
@@ -46,6 +46,16 @@ const routes = async (fastify, options) => {
     fastify.get("/ping", async (req,res)=> { // verifica che il server sia raggiungibile
         res.status(204).send();
     });
+
+    fastify.post('/gettoken', (req, res) => {
+        const token = fastify.jwt.sign({
+            id: req.body.user
+        })// id autobus, descrizione eventualmente altro
+        res.send({ token })
+      })
+
+    //user api
+
     fastify.post("/login",async (req,res) => {
         const pool = new Pool(psqlconfig);
         
@@ -54,11 +64,9 @@ const routes = async (fastify, options) => {
             let password = bcrypt.hashSync(req.body.crypted_password, result.rows[0].salt)
             if(password===res.rows[0].password)
             {
-                // invia token?
-                await req.session.set({
-                    user_id: result.rows[0].id,
-                    auth: result.rows[0].account_type
-                })
+                // salva la sessione
+                req.session.user_id = result.rows[0].id;
+                req.session.auth = result.rows[0].account_type;
                 // aggiorna last_login
                 pool.query('UPDATE Account SET last_login = $1 WHERE id = $2',[new Date().toISOString(),result.rows[0].id],()=>{
                     pool.end();
@@ -76,22 +84,30 @@ const routes = async (fastify, options) => {
     fastify.post("/register",async(req,res) => {
         const pool = new Pool(psqlconfig);
         let salt = bcrypt.genSaltSync(10);// generare il sale e salvarlo nel database
-        let hash = bcrypt.hashSync(myPlaintextPassword, salt);// Store hash in your password DB.
+        let hash = bcrypt.hashSync(myPlaintextPassword, salt);// generare la password e salvarlo nel database
         
         req.body.level;// livello di autorizzazione (0=utente base 1=segretario 2=gestore 3=admin ma non accettabile da api)
         
         pool.query('INSERT INTO Account(username,password,email,salt,account_type,created_on) VALUES($1,$2,$3,$4,NOW())',
                             [req.body.username,hash,req.body.email,salt,req.body.account_type])
-        .then((result) =>{
+        .then(() =>{
             res.send("Registrazione effettuata con successo!");
         })
         .catch(err => res.status(500).send(err))
     });
 
     fastify.post("/logout",async(req,res) => {
-        const session = await req.session.get();
-        await req.session.store.delete_all('user_id', session.id);
-        res.redirect('/home');// logout effettuato con successo
+        if (request.session.authenticated) {
+            request.sessionStore.destroy(request.session.sessionId, (err) => {
+              if (err) {
+                res.status(500).send('Internal Server Error')
+              } else {
+                request.session = null
+                res.redirect('/home')// logout effettuato con successo
+              }
+            })
+          } else 
+                res.redirect('/home');
     });
 }
 module.exports=routes;
