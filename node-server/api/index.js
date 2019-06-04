@@ -17,6 +17,9 @@ const routes = async (fastify, options) => {
                 .then((result)=>res.send(result.results[0].series[0]))
                 .catch((err)=>res.status(500).send(err));
     })
+    fastify.get("/ping", async (req,res)=> { // verifica che il server sia raggiungibile
+        res.status(204).send();
+    });
     fastify.get("/:id",async (req,res) => {
         const client = new Influx(connString);
         let id_req = parseInt(req.params.id);
@@ -43,9 +46,6 @@ const routes = async (fastify, options) => {
         .then((result)=>res.send(result))
         .catch((err)=>res.status(500).send(err));
     })
-    fastify.get("/ping", async (req,res)=> { // verifica che il server sia raggiungibile
-        res.status(204).send();
-    });
 
     fastify.post('/gettoken', (req, res) => {
         const token = fastify.jwt.sign({
