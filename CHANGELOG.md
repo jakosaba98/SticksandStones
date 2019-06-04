@@ -7,9 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - Home Page
+- Error pages
 
 ### Changed
 - Javascript for login and registration
+
+## 2019-06-04
+### Added
+- Error Handling with sending custom error pages (only on non-API requests)
+
+### Changed
 
 ## 2019-06-03
 ### Added
