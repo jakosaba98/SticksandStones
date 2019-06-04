@@ -21,6 +21,7 @@ fastify.register(require('fastify-static'), {
   serve: false // se si digita http://ip/index.html il server non dà risposta
 })
 
+
 fastify.decorate('authenticate',async(req,res)=>{
   try{
     await req.jwtVerify();
@@ -31,6 +32,21 @@ fastify.decorate('authenticate',async(req,res)=>{
 })
 
 fastify.register(require("./api"),{ prefix: '/api' });
+
+fastify.setErrorHandler((error, request, reply)=>{
+  if(error.message==="Not Found")// statusCode 404
+  {
+    reply.sendFile("error404.html")
+  }
+  else
+  if(error.message==="Internal Server Error")// statusCode 500
+  {
+    reply.sendFile("error500.html")
+  }
+  else
+    reply.send(error);
+})
+
 fastify.register(require("./static/public"),{ prefix: '/' });
 fastify.register(require("./static/private"),{ prefix: '/' });
 fastify.listen(80,'0.0.0.0');
