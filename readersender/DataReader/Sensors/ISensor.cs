@@ -12,7 +12,10 @@ namespace DataReader.Sensors
         virtual public string GetValue() => "";
         virtual public string ToJson()
         {
-            return "{\"" + GetName() + "\": " + GetValue() + "}";
+            if (GetName() == "gps")
+                return GetValue();
+
+            return "\n\"" + GetName() + "\": " + GetValue() + ",";
         }
     }
 }

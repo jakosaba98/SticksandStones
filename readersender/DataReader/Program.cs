@@ -32,24 +32,20 @@ namespace DataReader
             while (true)
             {
                 var data = ToJSON(id);
-                Console.WriteLine(data);
-
-                // push to redis queue
-                redis.LPush("sensors_data", data);
 
                 foreach (Sensor sensor in sensors)
                 {
-                    data = sensor.ToJson();
-                    Console.WriteLine(data);
+                    data += sensor.ToJson();
                     
-                    // push to redis queue
-                    redis.LPush("sensors_data", data);
                 }
+                Console.WriteLine(data);
+                // push to redis queue
+                redis.LPush("sensors_data", data);
                 System.Threading.Thread.Sleep(1000);
 
             }
         }
-        static string ToJSON(int id) => "{\"id:\": "+id+" }";
+        static string ToJSON(int id) => "{\n" + "\"id:\": " + id + ",";
 
         [Obsolete]
         public static string GetConfig()
