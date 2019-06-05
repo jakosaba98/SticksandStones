@@ -23,53 +23,50 @@ namespace DataSender
             var dns = config[0]; //dns pubblico statico ec2
             var port = config[1];
 
+            
+            
+
             while (true)
             {
-                Console.WriteLine(redis.BLPop(30, "sensors_data"));
 
                 //SAMPLE DI CONNESSIONE PER INVIO DATI POST
-                /*
+                
                 if (CheckForConnection(dns))
                 {
-                    // send value to remote API
-                    var data = redis.BLPop(30, "sensors_data"); //dentro per non perdere i dati
-                    Console.WriteLine(redis.BLPop(30, "sensors_data"));
-
-
-                    //POI SPOSTIAMO I SETTAGGI FUORI DAL CICLO
-
-                    var httpWebRequest = (HttpWebRequest)WebRequest.Create(dns+"::"+port);
+                    //autenticazione e connessione macchina
+                    var httpWebRequest = (HttpWebRequest)WebRequest.Create(dns+"/api");
                     httpWebRequest.ContentType = "application/json";
                     httpWebRequest.Method = "POST";
 
-                    using (var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream()))
-                    {
-                        string json = data ; //decidere se passare "data" interamente e poi sezionare i dati alla fine oppure altro
+                    // send value to remote API
+                    var data = redis.BLPop(30, "sensors_data"); //dentro per non perdere i dati
 
-                        streamWriter.Write(json);
-                        streamWriter.Flush();
-                        streamWriter.Close();
-                    }
+                    //flusso
+                    var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream());
 
-                    var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
-                    using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
-                    {
-                        var result = streamReader.ReadToEnd();
-                    }
-                    
-                    
+                    streamWriter.Write(data);
+                    Console.WriteLine(data);
+                    streamWriter.Flush();
+                    streamWriter.Close();
 
-
-
+                    /*
+                     var httpResponse = (HttpWebResponse)httpWebRequest.GetResponse();
+                     using (var streamReader = new StreamReader(httpResponse.GetResponseStream()))
+                     {
+                       var result = streamReader.ReadToEnd();
+                         Console.WriteLine(result);
+                     }
+                     */
                 }
-                */
-
-
-                // TODO...
 
                 //System.Threading.Thread.Sleep(1000);//1 sec ma non funziona per l'overflow
             }
+            
+
         }
+
+       
+
         public static bool CheckForConnection(string dns)
         {
             try

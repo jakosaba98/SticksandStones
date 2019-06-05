@@ -15,7 +15,7 @@ namespace DataReader.Sensors
             Random random = new Random();
             return ((double)random.Next(6500000, 18500000) / 1000000);//simulazione coordinate italiane
         }
-        override public string GetValue() => "{\"lat\":"+GetLat() +", \"lon\":"+ GetLon()+"}";
+        override public string GetValue() => "\n\"lat\": "+GetLat() +", \n\"lon\": "+ GetLon()+",";
         public override string GetName() => "gps";
     }
 }
