@@ -7,20 +7,20 @@ const psqlconfig = {
     password: config.password
 }
 
-const connString = "http://"+config.username+":"+config.password+"@"+config.ipaddress+":"+config.port+"/"+config.databasename;
+const connString = 'http://'+config.username+':'+config.password+'@'+config.ipaddress+':'+config.port+'/'+config.databasename;
 
 const routes = async (fastify, options) => {
-    fastify.get("/",async (req,res) => {
+    fastify.get('/',async (req,res) => {
         const client = new Influx(connString);
         client.query(config.measurement)
                 .set({limit: 20})//last 20 rows
                 .then((result)=>res.send(result.results[0].series[0]))
                 .catch((err)=>res.status(500).send(err));
     })
-    fastify.get("/ping", async (req,res)=> { // verifica che il server sia raggiungibile
+    fastify.get('/ping', async (req,res)=> { // verifica che il server sia raggiungibile
         res.status(204).send();
     });
-    fastify.get("/:id",async (req,res) => {
+    fastify.get('/:id',async (req,res) => {
         const client = new Influx(connString);
         let id_req = parseInt(req.params.id);
         client.query(config.measurement)
@@ -31,7 +31,7 @@ const routes = async (fastify, options) => {
                 .then((result)=>res.send(result.results[0].series))
                 .catch((err)=>res.status(500).send(err));
     })
-    fastify.post("/",{preValidation: [fastify.authenticate]},async (req,res) => {
+    fastify.post('/',{preValidation: [fastify.authenticate]},async (req,res) => {
         const client = new Influx(connString);
         client.write(config.measurement)
                 .tag({
@@ -56,7 +56,7 @@ const routes = async (fastify, options) => {
 
     //user api
 
-    fastify.post("/login",async (req,res) => {
+    fastify.post('/login',async (req,res) => {
         const pool = new Pool(psqlconfig);
         
         pool.query('SELECT id,username,password,salt,account_type FROM Account WHERE username=$1', [req.body.username])
@@ -70,7 +70,7 @@ const routes = async (fastify, options) => {
                 // aggiorna last_login
                 pool.query('UPDATE Account SET last_login = $1 WHERE id = $2',[new Date().toISOString(),result.rows[0].id],()=>{
                     pool.end();
-                    res.redirect('/home');
+                    res.redirect('/');
                 })
             }
             else
@@ -81,7 +81,7 @@ const routes = async (fastify, options) => {
         })
         .catch(err => res.status(500).send(err))
     });
-    fastify.post("/register",async(req,res) => {
+    fastify.post('/register',async(req,res) => {
         const pool = new Pool(psqlconfig);
         let salt = bcrypt.genSaltSync(10);// generare il sale e salvarlo nel database
         let hash = bcrypt.hashSync(myPlaintextPassword, salt);// generare la password e salvarlo nel database
@@ -91,23 +91,23 @@ const routes = async (fastify, options) => {
         pool.query('INSERT INTO Account(username,password,email,salt,account_type,created_on) VALUES($1,$2,$3,$4,NOW())',
                             [req.body.username,hash,req.body.email,salt,req.body.account_type])
         .then(() =>{
-            res.send("Registrazione effettuata con successo!");
+            res.send('Registrazione effettuata con successo!');
         })
         .catch(err => res.status(500).send(err))
     });
 
-    fastify.post("/logout",async(req,res) => {
+    fastify.post('/logout',async(req,res) => {
         if (request.session.authenticated) {
             request.sessionStore.destroy(request.session.sessionId, (err) => {
               if (err) {
                 res.status(500).send('Internal Server Error')
               } else {
                 request.session = null
-                res.redirect('/home')// logout effettuato con successo
+                res.redirect('/')// logout effettuato con successo
               }
             })
           } else 
-                res.redirect('/home');
+                res.redirect('/');
     });
 }
 module.exports=routes;
