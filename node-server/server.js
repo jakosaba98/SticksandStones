@@ -1,9 +1,9 @@
-const fastify = require("fastify")({
+const fastify = require('fastify')({
     ignoreTrailingSlash: true
 });
 const fastifySession = require('fastify-session');
 const fastifyCookie = require('fastify-cookie');
-const path = require("path");
+const path = require('path');
 
 fastify.register(fastifyCookie);
 fastify.register(fastifySession, {
@@ -18,7 +18,7 @@ fastify.register(require('fastify-jwt'), {
 
 fastify.register(require('fastify-static'), {
   root: path.join(__dirname, 'static/html'),
-  serve: false // se si digita http://ip/index.html il server non dà risposta
+  // serve: false // se si digita http://ip/index.html il server non dà risposta
 })
 
 
@@ -31,23 +31,23 @@ fastify.decorate('authenticate',async(req,res)=>{
   }
 })
 
-fastify.register(require("./api"),{ prefix: '/api' });
+fastify.register(require('./api'),{ prefix: '/api' });
 
 fastify.setErrorHandler((error, request, reply)=>{
-  if(error.message==="Not Found")// statusCode 404
+  if(error.message==='Not Found')// statusCode 404
   {
-    reply.sendFile("error404.html")
+    reply.sendFile('error404.html')
   }
   else
-  if(error.message==="Internal Server Error")// statusCode 500
+  if(error.message==='Internal Server Error')// statusCode 500
   {
-    reply.sendFile("error500.html")
+    reply.sendFile('error500.html')
   }
   else
     reply.send(error);
 })
 
-fastify.register(require("./static/public"),{ prefix: '/' });
-fastify.register(require("./static/private"),{ prefix: '/' });
+fastify.register(require('./static/public'),{ prefix: '/' });
+fastify.register(require('./static/private'),{ prefix: '/' });
 fastify.listen(80,'0.0.0.0');
 // change 0.0.0.0 to static ip address if possible!!
