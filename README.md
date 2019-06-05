@@ -9,10 +9,10 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-OS Android (from 4.1), iOS or Windows, (we need to run some tests! This is an estimation)
-A browser or ours app,
-An Internet connection,
-GPS location,
+- OS Android (from 4.1), iOS or Windows, (we need to run some tests! This is an estimation)
+- A browser or ours app,
+- An Internet connection,
+- GPS location,
 
 (What things you need to install the software and how to install them)
 
