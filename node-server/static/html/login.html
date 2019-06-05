@@ -36,14 +36,15 @@
 </head>
 
 <body class="text-center">
-  <form class="form-signin" target="./login" method="POST">
+  <form class="form-signin">
     <img class="mb-4" src="signinfoto.jpg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Portale di autenticazione</h1>
     <label for="inputUtente" class="sr-only">Nome Utente</label>
     <input id="inputUtente" type="text" class="form-control" placeholder="Nome utente" required autofocus>
     <label for="inputPassword" class="sr-only">Password</label>
     <input id="inputPassword" type="password" class="form-control" placeholder="Password" required>
-    <button id="submit" type="submit" class="btn btn-lg btn-primary btn-block">Entra</button>
+    <button id="submit" type="button" class="btn btn-lg btn-primary btn-block">Entra</button>
+    <div id="error"></div><!-- <<<<<< MODIFICARE!!!! -->
     <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
   </form>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
