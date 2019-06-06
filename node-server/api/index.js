@@ -2,9 +2,10 @@ const Influx = require('influxdb-nodejs');
 const config = require('../config.json');
 const { Pool } = require('pg')
 const psqlconfig = {
+    user: config.postgres,
     host: config.ipaddress,
-    user: config.username,
-    password: config.password
+    database: config.dbpostgres,
+    password: config.postgres
 }
 
 const connString = 'http://'+config.username+':'+config.password+'@'+config.ipaddress+':'+config.port+'/'+config.databasename;
@@ -61,17 +62,25 @@ const routes = async (fastify, options) => {
         
         pool.query('SELECT id,username,password,salt,account_type FROM Account WHERE username=$1', [req.body.username])
         .then((result) =>{
-            let password = bcrypt.hashSync(req.body.crypted_password, result.rows[0].salt)
-            if(password===res.rows[0].password)
+            if(result.rows[0])// username not found
             {
-                // salva la sessione
-                req.session.user_id = result.rows[0].id;
-                req.session.auth = result.rows[0].account_type;
-                // aggiorna last_login
-                pool.query('UPDATE Account SET last_login = $1 WHERE id = $2',[new Date().toISOString(),result.rows[0].id],()=>{
+                let password = bcrypt.hashSync(req.body.crypted_password, result.rows[0].salt)
+                if(password===res.rows[0].password)
+                {
+                    // salva la sessione
+                    req.session.user_id = result.rows[0].id;
+                    req.session.auth = result.rows[0].account_type;
+                    // aggiorna last_login
+                    pool.query('UPDATE Account SET last_login = $1 WHERE id = $2',[new Date().toISOString(),result.rows[0].id],()=>{
+                        pool.end();
+                        res.redirect('/');
+                    })
+                }
+                else
+                {
                     pool.end();
-                    res.redirect('/');
-                })
+                    res.status(401).send();// unauthorized
+                }
             }
             else
             {

@@ -17,7 +17,13 @@ namespace DataReader.Sensors
             {
                 current_doors = !current_doors;
             }
-            return ""+current_doors; //chiusa
+
+            if (current_doors)
+            {
+                return "true";
+            }
+
+            return "false"; //chiusa
         }
     }
 }
