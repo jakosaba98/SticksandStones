@@ -45,7 +45,7 @@ namespace DataReader
 
             }
         }
-        static string ToJSON(int id) => "{\n" + "\"id:\": " + id + ",";
+        static string ToJSON(int id) => "{\n" + "\"id\": " + id + ",";
 
         [Obsolete]
         public static string GetConfig()

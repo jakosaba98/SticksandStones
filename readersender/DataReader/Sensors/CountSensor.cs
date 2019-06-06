@@ -22,7 +22,7 @@ namespace DataReader.Sensors
         {
             Random random = new Random();
 
-            if (d.GetValue()=="True")
+            if (d.GetValue()=="true")
             {
                 if (random.Next(1, 3) == 1) //33% che un passeggero salga
                 {
