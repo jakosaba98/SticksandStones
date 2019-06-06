@@ -42,7 +42,7 @@ const routes = async (fastify, options) => {
                     count: req.body.count,
                     doors: req.body.doors,
                     lat: req.body.lat,
-                    lng: req.body.lng,
+                    lng: req.body.lon,
                 })
         .then((result)=>res.send(result))
         .catch((err)=>res.status(500).send(err));
