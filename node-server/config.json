@@ -4,5 +4,7 @@
     "username":"SandSAdmin",
     "password": "logPSTW",
     "databasename": "local_storage",
-    "measurement": "public_transport"
+    "measurement": "public_transport",
+    "postgres": "SandS",
+    "dbpostgres": "dbsands"
 }
