@@ -2,11 +2,19 @@
 body {
     padding-top: 3.5rem;
   }
- div.col {
+ div#testo {
     font-size: 30px;
     text-align: center;
     padding: 90px;
+    width: auto;
   }
-  .img-fluid{ max-width: 100%;
+  div#foto {
+    font-size: 30px;
+    text-align: center;
+    padding: 90px;
+    width: auto;
+  }
+  .img-fluid{ 
+    max-width: 100%;
     height: auto;
   }
