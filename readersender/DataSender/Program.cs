@@ -104,7 +104,7 @@ namespace DataSender
             string dns = ConfigurationManager.AppSettings["dns"];
             string port = ConfigurationManager.AppSettings["port"];
             string idbus = ConfigurationManager.AppSettings["idbus"];
-            string[] config = {dns, port, idbus };
+            string[] config = {dns, port, idbus };// indici: 0=dns, 1=port, 2=idbus
             return config;
         }
 
