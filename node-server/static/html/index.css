@@ -18,3 +18,20 @@ body {
     max-width: 100%;
     height: auto;
   }
+  .row {
+    margin-left: 0px;
+    margin-right: 0px;
+    max-height: 900px;
+  }
+
+  .column {
+    float: left;
+    width: 25%;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
