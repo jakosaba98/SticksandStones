@@ -1,0 +1,106 @@
+<!doctype html>
+<html lang="en">
+
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+  <meta name="description" content="">
+  <meta name="generator" content="Jekyll v3.8.5">
+  <title>Benvenuti nel portale di registrazione</title>
+
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
+    integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+
+  <!--Collegamento Bootstrap core CSS -->
+  <style>
+    .bd-placeholder-img {
+      font-size: 1.125rem;
+      text-anchor: middle;
+      -webkit-user-select: none;
+      -moz-user-select: none;
+      -ms-user-select: none;
+      user-select: none;
+    }
+
+    @media (min-width: 768px) {
+      .bd-placeholder-img-lg {
+        font-size: 3.5rem;
+      }
+    }
+  </style>
+  <!-- Stili pagina -->
+  <link href="signin.css" rel="stylesheet">
+  <link href="mio_custom_stile.css" rel="stylesheet">
+
+</head>
+
+<body class="text-center">
+  <form class="form-signin">
+    <img class="mb-4" src="signinfoto.jpg" alt="" width="72" height="72">
+    <h1 class="h3 mb-3 font-weight-normal">Portale di registrazione</h1>
+    <label for="Email" class="sr-only">Email</label>
+    <input type="text" id="Email" class="form-control" placeholder="name@example.com" required autofocus>
+
+
+    <label for="nomeutente" class="sr-only">Nome Utente</label>
+    <input type="text" id="Utente" class="form-control" placeholder="Nome utente" required autofocus>
+
+
+
+
+    <label for="inputPassword" class="sr-only">Password</label>
+    <input type="password" onclick="myFunction()" id="inputPassword" class="form-control" placeholder="Password"
+      required>
+     
+      <!-- <p id="demo"></p>
+    <script>
+      function myFunction() {
+        var x, text;
+
+        
+        x = document.getElementById("inputPassword").value;
+
+        
+        if (x.length < 8) {
+          text = "Digita almeno 8 caratteri/numeri";
+        } else {
+          text = "Input OK";
+        }
+        document.getElementById("demo").innerHTML = text;
+      }
+    </script> -->
+
+
+
+
+
+
+
+
+    <label for="inputPassword2" class="sr-only">Conferma password</label>
+    <input type="password" id="inputPassword2" class="form-control" placeholder="Conferma password" required>
+
+
+
+    <div class="checkbox mb-3">
+      <label>
+        <input type="checkbox" value="remember-me"> Accetta i termini e acconsenti
+      </label>
+    </div>
+
+    <div class="Error">
+
+      Digita l'email correttamente.
+      </div>
+      <div class="Error">
+        Digita la password correttamente.
+      </div>
+<br>
+
+    <button class="btn btn-lg btn-primary btn-block" type="submit">Registrati</button>
+    <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
+  </form>
+</body>
+
+</html>
