@@ -10,6 +10,7 @@ $('#submit').on('click',()=>{
         console.log(result);
     }).catch((error)=>{
         console.log(error);
-        $('#error').text(error.responseJSON.code+" - "+error.responseJSON.error);
+        if(error.responseJSON.code==='ECONNREFUSED')
+            $('#error').text('Server non disponibile al momento. Riprovare più tardi (Internal Server Error)');
     })
 })
