@@ -16,7 +16,7 @@ const routes = async (fastify, options) => {
         client.query(config.measurement)
                 .set({limit: 20})//last 20 rows
                 .then((result)=>res.send(result.results[0].series[0]))
-                .catch((err)=>res.status(500).send(err));
+                .catch((err)=>{console.log(err);res.status(500).send(err)});
     })
     fastify.get('/ping', async (req,res)=> { // verifica che il server sia raggiungibile
         res.status(204).send();
@@ -45,7 +45,7 @@ const routes = async (fastify, options) => {
                     lng: req.body.lon,
                 })
         .then((result)=>res.send(result))
-        .catch((err)=>res.status(500).send(err));
+        .catch((err)=>{console.log(err);res.status(500).send(err)});
     })
 
     fastify.post('/gettoken', (req, res) => {
