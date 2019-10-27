@@ -1,4 +1,5 @@
 $('#submit').on('click',()=>{
+    $('#error').text('');// delete old errors
     let obj = {};
     obj.username = $('#inputUtente').val();
     obj.crypted_password = sha512($('#inputPassword').val());

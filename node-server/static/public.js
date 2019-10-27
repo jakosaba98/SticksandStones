@@ -38,7 +38,7 @@ const routes = async (fastify, options) => {
         else
             res.sendFile('mappa.html');
     })
-    fastify.get('/test_mappe.html',async(req,res)=>{//rimuovere
+    fastify.get('/test_mappe.html',async(req,res)=>{//remove plz!!!!!!!!!!
         res.sendFile('test_mappe.html');
     })
 }

@@ -10,7 +10,7 @@
         "fastify-jwt": "^0.10.0",
         "fastify-session": "^3.0.0",
         "fastify-static": "^2.4.0",
-        "influxdb-nodejs": "^3.0.0",
+        "influx": "^5.4.2",
         "pg": "^7.11.0"
     },
     "repository": {

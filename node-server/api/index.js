@@ -1,4 +1,4 @@
-const Influx = require('influxdb-nodejs');
+const Influx = require('influx');
 const config = require('../config.json');
 const { Pool } = require('pg')
 const psqlconfig = {
@@ -7,43 +7,92 @@ const psqlconfig = {
     database: config.dbpostgres,
     password: config.postgres
 }
-
-const connString = 'http://'+config.username+':'+config.password+'@'+config.ipaddress+':'+config.port+'/'+config.databasename;
+const influxConfig = {
+    host: config.ipaddress,
+    database: config.databasename,
+    port: config.port,
+    username: config.username,
+    password: config.password,
+    schema: [
+    {
+        measurement: config.measurement,
+        fields: {
+          count: Influx.FieldType.FLOAT,
+          doors: Influx.FieldType.BOOLEAN,
+          lat: Influx.FieldType.FLOAT,
+          lon: Influx.FieldType.FLOAT
+        },
+        tags: [
+          'id'
+        ]
+    }
+    ]
+}
 
 const routes = async (fastify, options) => {
     fastify.get('/',async (req,res) => {
-        const client = new Influx(connString);
-        client.query(config.measurement)
-                .set({limit: 20})//last 20 rows
-                .then((result)=>res.send(result.results[0].series[0]))
-                .catch((err)=>res.status(500).send(err));
+        const influx = new Influx.InfluxDB(influxConfig);
+        let queryString=`select *
+                        from ${config.measurement}
+                        order by time desc
+                        limit 20`;
+        influx.query(queryString)
+            .then(results => res.send(results))
+            .catch((err)=>res.send(err));
     })
-    fastify.get('/ping', async (req,res)=> { // verifica che il server sia raggiungibile
-        res.status(204).send();
+    //test if server is ready
+    fastify.get('/ping', async (req,res)=> {
+        const influx = new Influx.InfluxDB(influxConfig);
+        influx.ping(5000).then(hosts => {
+            hosts.forEach(host => {
+              if (host.online) {
+                res.status(204).send();
+              } else {
+                res.status(503).send('InfluxDB is offline');
+              }
+            })
+          })
     });
+    //returns last position of autobus {id} using filter {time}
+    fastify.get('/:id/:time',async (req,res) => {
+        const influx = new Influx.InfluxDB(influxConfig);
+        let timestamp=new Date(Number(req.params.time)).getTime()*1000000;
+        let queryString=`select *
+                        from ${config.measurement}
+                        where id = ${Influx.escape.stringLit(req.params.id)}`;
+        if(!isNaN(timestamp))
+            queryString+=' and "time" > '+timestamp;
+        queryString+=' order by time desc';
+        influx.query(queryString)
+            .then(results => res.send(results))
+            .catch((err)=>res.send(err));
+    })
+    //returns last position of autobus {id}
     fastify.get('/:id',async (req,res) => {
-        const client = new Influx(connString);
-        let id_req = parseInt(req.params.id);
-        client.query(config.measurement)
-                .where({
-                    id: id_req
-                })
-                .set({limit: 20})
-                .then((result)=>res.send(result.results[0].series))
-                .catch((err)=>res.status(500).send(err));
+        const influx = new Influx.InfluxDB(influxConfig);
+        let queryString=`select *
+                        from ${config.measurement}
+                        where id = ${Influx.escape.stringLit(req.params.id)}
+                        order by time desc
+                        limit 1`;
+        influx.query(queryString)
+            .then(results => res.send(results))
+            .catch((err)=>res.send(err));
     })
     fastify.post('/',{preValidation: [fastify.authenticate]},async (req,res) => {
-        const client = new Influx(connString);
-        client.write(config.measurement)
-                .tag({
-                    id: req.body.id
-                })
-                .field({
-                    count: req.body.count,
-                    doors: req.body.doors,
-                    lat: req.body.lat,
-                    lng: req.body.lon,
-                })
+        const influx = new Influx.InfluxDB(influxConfig);
+        influx.writePoints([
+            {
+              measurement: config.measurement,
+              tags: { id: req.body.id },
+              fields: { 
+                count: req.body.count,
+                doors: req.body.doors,
+                lat: req.body.lat,
+                lon: req.body.lon
+              }
+            }
+          ])
         .then((result)=>res.send(result))
         .catch((err)=>res.status(500).send(err));
     })

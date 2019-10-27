@@ -50,4 +50,3 @@ fastify.setErrorHandler((error, request, reply)=>{
 fastify.register(require('./static/public'),{ prefix: '/' });
 fastify.register(require('./static/private'),{ prefix: '/' });
 fastify.listen(80,'127.0.0.1');
-// change 0.0.0.0 to static ip address if possible!!
