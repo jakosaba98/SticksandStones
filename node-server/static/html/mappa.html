@@ -52,7 +52,10 @@
     }
     .map {
       width: 100%;
-      height:600px;
+      height:400px;
+    }
+    #autobus{
+      margin-top:100px;
     }
   </style>
   <!-- Stili pagina -->
@@ -96,11 +99,21 @@
         </ul>
       </div>
     </nav>
+    <span>Scegli un autobus</span>
+    <select id="autobus" class="browser-default">
+      <option disabled selected></option>
+      <option value="1">Autobus Venezia</option>
+      <option value="2">Autobus Treviso</option>
+      <option value="3">Autobus Verona</option>
+      <option value="4">Autobus Padova</option>
+      <option value="5">Autobus Vicenza</option>
+    </select>
     <div id="map" class="map"></div>
-      <footer class="container">
-            <p>VVS - Veneto Vehicle Services S.p.a. - P.IVA. 03758364582 - Tel. 0421.034532 - info@vvs.pd.it - pec: vvs@pecstar.it</p>
-          <p>powered by © Sticks & Stones 2019-2020</p>
-        </footer>
+
+    <footer class="container">
+      <p>VVS - Veneto Vehicle Services S.p.a. - P.IVA. 03758364582 - Tel. 0421.034532 - info@vvs.pd.it - pec: vvs@pecstar.it</p>
+      <p>powered by © Sticks & Stones 2019-2020</p>
+    </footer>
   <!-- Collegamenti agli script -->
   <script src="script_bootstrap/jquery-3.js"></script>
   <script src="script_bootstrap/bootstrap.js"></script>

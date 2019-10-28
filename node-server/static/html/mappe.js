@@ -1,7 +1,9 @@
 let locations=[];
-let start=[{lat:45,lon:12}];//defines map start
+const repeat=5000;
+const start={
+  3:[{lat:45.438712,lon:10.990199}]
+};
 let provider = new com.modestmaps.TemplatedLayer('http://tile.openstreetmap.org/{Z}/{X}/{Y}.png');
-const id=3;
 let map = new com.modestmaps.Map('map', provider); 
 let canvas = document.createElement('canvas');
 canvas.style.position = 'absolute';
@@ -10,6 +12,12 @@ canvas.style.top = '0';
 canvas.width = map.dimensions.x;
 canvas.height = map.dimensions.y;
 map.parent.appendChild(canvas);
+map.addCallback('drawn', redraw);
+map.addCallback('resized', function() {
+  canvas.width = map.dimensions.x;
+  canvas.height = map.dimensions.y;
+  redraw();
+});
 
 let xhr=new XMLHttpRequest();
 xhr.onreadystatechange = () => {
@@ -26,8 +34,25 @@ xhr.onreadystatechange = () => {
       }
 }
 
-map.setExtent(start);
-map.setZoom(14);
+$('#autobus').on('change',(el)=>
+init(el.target.value)
+);
+
+function init(id){
+  console.log(id);
+  locations=[];
+  map.setExtent(start[id]);
+  map.setZoom(16);
+  redraw();
+
+  //send a request and add new points
+  clearInterval(repeatFunction);
+  let repeatFunction=setInterval(() => {
+    let timestamp=new Date().getTime()-repeat;
+    xhr.open('GET','http://localhost/api/'+id+'/'+timestamp);
+    xhr.send();
+  }, repeat);
+}
 
 function redraw() {
   let ctx = canvas.getContext('2d');
@@ -57,27 +82,10 @@ function redraw() {
   ctx.stroke();
 }
 
-map.addCallback('drawn', redraw);
-map.addCallback('resized', function() {
-  canvas.width = map.dimensions.x;
-  canvas.height = map.dimensions.y;
-  redraw();
-});
-
-redraw();
-
 function addLocation(point){
   locations.push(point);
+  let zoom=map.getZoom();
   map.setExtent(locations);
-  if(map.getZoom()>14)
-    map.setZoom(14);
+  map.setZoom(zoom);
   redraw();
 }
-
-//send a request and add new points
-let repeat=5000;
-setInterval(() => {
-  let timestamp=new Date().getTime()-repeat;
-  xhr.open('GET','http://localhost/api/'+id+'/'+timestamp);
-  xhr.send();
-}, repeat);
