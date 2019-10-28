@@ -1,21 +1,24 @@
 const Influx = require('influx');
 const config = require('../config.json');
-const { Pool } = require('pg')
+const { Pool } = require('pg');
+const bcrypt = require('bcrypt');
+
 const psqlconfig = {
-    user: config.postgres,
+    user: config.postgres.username,
     host: config.ipaddress,
-    database: config.dbpostgres,
-    password: config.postgres
+    database: config.postgres.database,
+    password: config.postgres.password,
+    port: config.postgres.port
 }
 const influxConfig = {
     host: config.ipaddress,
-    database: config.databasename,
-    port: config.port,
-    username: config.username,
-    password: config.password,
+    database: config.influx.database,
+    port: config.influx.port,
+    username: config.influx.username,
+    password: config.influx.password,
     schema: [
     {
-        measurement: config.measurement,
+        measurement: config.influx.measurement,
         fields: {
           count: Influx.FieldType.FLOAT,
           doors: Influx.FieldType.BOOLEAN,
@@ -114,7 +117,7 @@ const routes = async (fastify, options) => {
             if(result.rows[0])// username not found
             {
                 let password = bcrypt.hashSync(req.body.crypted_password, result.rows[0].salt)
-                if(password===res.rows[0].password)
+                if(password===result.rows[0].password)
                 {
                     // salva la sessione
                     req.session.user_id = result.rows[0].id;
@@ -142,17 +145,16 @@ const routes = async (fastify, options) => {
     fastify.post('/register',async(req,res) => {
         const pool = new Pool(psqlconfig);
         let salt = bcrypt.genSaltSync(10);// generare il sale e salvarlo nel database
-        let hash = bcrypt.hashSync(myPlaintextPassword, salt);// generare la password e salvarlo nel database
+        let hash = bcrypt.hashSync(req.body.password, salt);// generare la password e salvarlo nel database
 
-        req.body.level;// livello di autorizzazione (0=utente base 1=segretario 2=gestore 3=admin ma non accettabile da api)
+        level=1;// livello di autorizzazione (0=utente base 1=segretario 2=gestore 3=admin ma non accettabile da api)
 
-        pool.query('INSERT INTO Account(username,password,email,salt,account_type,created_on) VALUES($1,$2,$3,$4,NOW())',
-                            [req.body.username,hash,req.body.email,salt,req.body.account_type])
+        pool.query('INSERT INTO Account(username,password,email,salt,account_type,created_on) VALUES($1,$2,$3,$4,$5,NOW())',
+                            [req.body.username,hash,req.body.email,salt,level])
         .then(() =>{
             res.send('Registrazione effettuata con successo!');
         })
-        .catch(err => res.status(500).send(err))
-    });
+        .catch(err => res.status(500).send(err))});
 
     fastify.post('/logout',async(req,res) => {
         if (request.session.authenticated) {

@@ -7,11 +7,13 @@ $('#submit').on('click',()=>{
         contentType: "application/json",
         method: "POST",
         data: JSON.stringify(obj)
-    }).then((result)=>{
-        console.log(result);
+    }).then(()=>{
+        window.location=window.location;
     }).catch((error)=>{
-        console.log(error);
-        if(error.responseJSON.code==='ECONNREFUSED')
+        //console.log(error);
+        if(error.status==500)
             $('#error').text('Server non disponibile al momento. Riprovare più tardi (Internal Server Error)');
+        if(error.status==401)
+            $('#error').text('Utente o password sbagliata');
     })
 })

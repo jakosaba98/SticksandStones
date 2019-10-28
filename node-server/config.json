@@ -1,10 +1,17 @@
 {
-    "ipaddress": "127.0.0.1",
-    "port": 8086,
-    "username":"SandSAdmin",
-    "password": "logPSTW",
-    "databasename": "local_storage",
-    "measurement": "public_transport",
-    "postgres": "SandS",
-    "dbpostgres": "dbsands"
+    "influx":{
+        "port": 8086,
+        "username":"SandSAdmin",
+        "password": "logPSTW",
+        "database": "local_storage",
+        "measurement": "public_transport"
+
+    },
+    "postgres":{
+        "port": 5432,
+        "username":"SandS",
+        "password": "SandS",
+        "database": "dbsands"
+    },
+    "ipaddress": "127.0.0.1"
 }
