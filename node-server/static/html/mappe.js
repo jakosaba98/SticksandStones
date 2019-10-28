@@ -3,6 +3,7 @@ const repeat=5000;
 const start={
   3:[{lat:45.438712,lon:10.990199}]
 };
+let repeatFunction=()=>{};
 let provider = new com.modestmaps.TemplatedLayer('http://tile.openstreetmap.org/{Z}/{X}/{Y}.png');
 let map = new com.modestmaps.Map('map', provider); 
 let canvas = document.createElement('canvas');
@@ -46,8 +47,8 @@ function init(id){
   redraw();
 
   //send a request and add new points
-  clearInterval(repeatFunction);
-  let repeatFunction=setInterval(() => {
+  //clearInterval(repeatFunction);
+  repeatFunction=setInterval(() => {
     let timestamp=new Date().getTime()-repeat;
     xhr.open('GET','http://localhost/api/'+id+'/'+timestamp);
     xhr.send();
