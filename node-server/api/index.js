@@ -1,7 +1,7 @@
 const Influx = require('influx');
 const config = require('../config.json');
 const { Pool } = require('pg');
-const bcrypt = require('bcrypt');
+const bcrypt = require('bcryptjs');
 
 const psqlconfig = {
     user: config.postgres.username,
