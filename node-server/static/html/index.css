@@ -36,7 +36,19 @@ body {
     display: table;
     clear: both;
   }
- 
+.jumbotron{
+  background-image: url("bandieraVeneto.png");
+  background-position: center;
+background-size: cover;
+background-blend-mode: overlay;
+}
+div#assistenza{
+  background-image: url("padovaduomo.jpg");
+  background-position: center;
+background-size: cover;
+background-blend-mode: overlay;
+background-color: #f606;
+}
 
 
   
