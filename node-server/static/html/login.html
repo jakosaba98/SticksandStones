@@ -8,7 +8,7 @@
   <meta name="generator" content="Jekyll v3.8.5">
   <title>Benvenuti nel portale di autenticazione</title>
 
-  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/sign-in/">
+  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/jumbotron/">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -38,32 +38,40 @@
 <body class="text-center">
    <!--Barra fissa-->
    <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="index.htm"> <img src="signinfoto.jpg" class="img-fluid" alt="Responsive image" width="60px" height="60px"> </a>
-      <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
-        aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
-        <span class="navbar-toggler-icon"></span>
-      </button>
+    <a class="navbar-brand" href="index.htm"> <img src="signinfoto.jpg" class="img-fluid" alt="Responsive image" width="60px" height="60px"> </a>
+    <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
+      aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
+      <span class="navbar-toggler-icon"></span>
+    </button>
 
-      <div class="navbar-collapse collapse" id="navbarsExampleDefault">
-        <ul class="navbar-nav mr-auto">
-          <li class="nav-item active">
-            <a class="nav-link" href="index.htm">Home<span class="sr-only">(current)</span></a>
+    <div class="navbar-collapse collapse" id="navbarsExampleDefault">
+      <ul class="navbar-nav mr-auto">
+        <li class="nav-item active">
+          <a class="nav-link" href="index.htm" style="color: rgba(255,255,255,.5);">Home<span class="sr-only">(current)</span></a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="azienda.html">Azienda</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="https://www.google.it/maps/dir/Padova,+Provincia+di+Padova//@45.366165,11.7508741,12z/data=!4m9!4m8!1m5!1m1!1s0x477eda5841ab30cf:0xc18236edaa1a2e2c!2m2!1d11.8767611!2d45.4064349!1m0!3e3?hl=it">Tratte e orari</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href="mappa.html">Mappa</a>
+        </li>
+        <li class="nav-item dropdown">
+          <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
+            aria-expanded="false">Account</a>
+          <div class="dropdown-menu" aria-labelledby="dropdown01">
+            <a class="dropdown-item" href="login.html">Accedi</a>
+            <a class="dropdown-item" href="registrazione.html">Registrati</a>
+          </div>
+        </li>
+        <li class="nav-item">
+            <a class="nav-link" href="contatti.html">Contatti</a>
           </li>
-          <li class="nav-item">
-            <a class="nav-link" href="azienda.html">Azienda</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="https://www.google.it/maps/dir/Padova,+Provincia+di+Padova//@45.366165,11.7508741,12z/data=!4m9!4m8!1m5!1m1!1s0x477eda5841ab30cf:0xc18236edaa1a2e2c!2m2!1d11.8767611!2d45.4064349!1m0!3e3?hl=it">Tratte e Orari</a>
-          </li>
-          <li class="nav-item">
-            <a class="nav-link" href="mappa.html">Mappa</a>
-          </li>
-          <li class="nav-item">
-              <a class="nav-link" href="contatti.html">Contatti</a>
-            </li>
-        </ul>
-      </div>
-    </nav>
+      </ul>
+    </div>
+  </nav>
   <form class="form-signin">
     <img class="mb-4" src="signinfoto.jpg" alt="" width="72" height="72">
     <h1 class="h3 mb-3 font-weight-normal">Portale di autenticazione</h1>
@@ -72,12 +80,14 @@
     <label for="inputPassword" class="sr-only">Password</label>
     <input id="inputPassword" type="password" class="form-control" placeholder="Password" required>
     <button id="submit" type="button" class="btn btn-lg btn-primary btn-block">Entra</button>
-    <div id="error"></div><!-- <<<<<< MODIFICARE!!!! -->
+    <div id="error"></div> <!-- <<<<<< MODIFICARE!!!! -->
     <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
   </form>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
   <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha512/0.8.0/sha512.min.js"></script>
   <script src="login.js"></script>
+  <!-- Collegamenti agli script -->
+  <script src="script_bootstrap/bootstrap.js"></script>
 </body>
 
 </html>
