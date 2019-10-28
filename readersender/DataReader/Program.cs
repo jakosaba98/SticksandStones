@@ -41,6 +41,7 @@ namespace DataReader
                 Console.WriteLine(data);
                 // push to redis queue
                 redis.LPush("sensors_data", data);
+ 
                 System.Threading.Thread.Sleep(1000);
 
             }
