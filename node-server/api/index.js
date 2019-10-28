@@ -120,7 +120,7 @@ const routes = async (fastify, options) => {
                 if(password===result.rows[0].password)
                 {
                     // salva la sessione
-                    req.session.user_id = result.rows[0].id;
+                    req.session.name = result.rows[0].username;
                     req.session.auth = result.rows[0].account_type;
                     // aggiorna last_login
                     pool.query('UPDATE Account SET last_login = $1 WHERE id = $2',[new Date().toISOString(),result.rows[0].id],()=>{

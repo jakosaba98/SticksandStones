@@ -1,8 +1,10 @@
 let locations=[];
 const repeat=2000;
 const start={
+  1:[{lat:45.66322,lon:12.233668}],
+  2:[{lat:45.40229,lon:11.872023}],
   3:[{lat:45.438712,lon:10.990199}],
-  4:[{lat:45.40229,lon:11.872023}]
+  4:[{lat:45.5496477,lon:11.55359}],
 };
 let repeatFunction=()=>{};
 let provider = new com.modestmaps.TemplatedLayer('http://tile.openstreetmap.org/{Z}/{X}/{Y}.png');
@@ -26,7 +28,7 @@ xhr.onreadystatechange = () => {
   if (xhr.readyState === 4)
       try {
           let obj = JSON.parse(xhr.response);
-          for(let i=0;i<obj.length;i++)
+          for(let i=obj.length-1;i>=0;i--)
           {
             addLocation(obj[i]);
           }
