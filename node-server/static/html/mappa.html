@@ -35,6 +35,7 @@
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
 
+
   <style>
     .bd-placeholder-img {
       font-size: 1.125rem;
@@ -56,16 +57,25 @@
     }
     #autobus{
       margin-top:100px;
+      display: flex;
+      flex-direction: row;
+      padding:10px;
+    }
+    #span{
+      flex:1;
+      padding: 8px;
+      padding-right: 20px;
+      text-align: right;
     }
   </style>
   <!-- Stili pagina -->
-  <link href="mappa.css" rel="stylesheet">
+  <link href="css/mappa.css" rel="stylesheet">
 </head>
 
 <body>
     <!--Barra fissa-->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
-      <a class="navbar-brand" href="index.htm"> <img src="signinfoto.jpg" class="img-fluid" alt="Responsive image" width="60px" height="60px"> </a>
+      <a class="navbar-brand" href="index.htm"> <img src="images/signinfoto.jpg" class="img-fluid" alt="Responsive image" width="60px" height="60px"> </a>
       <button class="navbar-toggler collapsed" type="button" data-toggle="collapse" data-target="#navbarsExampleDefault"
         aria-controls="navbarsExampleDefault" aria-expanded="false" aria-label="Toggle navigation">
         <span class="navbar-toggler-icon"></span>
@@ -99,14 +109,17 @@
         </ul>
       </div>
     </nav>
-    <span>Scegli un autobus</span>
-    <select id="autobus" class="browser-default">
-      <option disabled selected></option>
-      <option value="1">Autobus Vicenza</option>
-      <option value="2">Autobus Treviso</option>
-      <option value="3">Autobus Verona</option>
-      <option value="4">Autobus Padova</option>
-    </select>
+    <div id="autobus">
+      <span id='span'>Scegli un autobus</span>
+      <select style="flex:1" class="browser-default custom-select">
+        <option disabled selected></option>
+        <option value="1">Autobus Vicenza</option>
+        <option value="2">Autobus Treviso</option>
+        <option value="3">Autobus Verona</option>
+        <option value="4">Autobus Padova</option>
+      </select>
+      <span id='span'></span>
+    </div>
     <div id="map" class="map"></div>
 
     <footer class="container">
@@ -116,8 +129,8 @@
   <!-- Collegamenti agli script -->
   <script src="script_bootstrap/jquery-3.js"></script>
   <script src="script_bootstrap/bootstrap.js"></script>
-  <script src="modestmaps.min.js"></script>
-  <script src="mappe.js"></script>
+  <script src="js/modestmaps.min.js"></script>
+  <script src="js/mappe.js"></script>
 
 </body>
 
