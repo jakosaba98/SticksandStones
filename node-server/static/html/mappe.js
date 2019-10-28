@@ -1,7 +1,8 @@
 let locations=[];
-const repeat=5000;
+const repeat=2000;
 const start={
-  3:[{lat:45.438712,lon:10.990199}]
+  3:[{lat:45.438712,lon:10.990199}],
+  4:[{lat:45.40229,lon:11.872023}]
 };
 let repeatFunction=()=>{};
 let provider = new com.modestmaps.TemplatedLayer('http://tile.openstreetmap.org/{Z}/{X}/{Y}.png');
