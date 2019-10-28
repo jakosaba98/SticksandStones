@@ -11,10 +11,34 @@ body {
   div#foto {
     font-size: 30px;
     text-align: center;
-    padding: 90px;
+    padding-left: 0px;
+    padding-right: 0px;
     width: auto;
   }
   .img-fluid{ 
     max-width: 100%;
     height: auto;
   }
+  .row {
+    margin-left: 0px;
+    margin-right: 0px;
+    max-height: 900px;
+  }
+
+  .column {
+    float: left;
+    width: 25%;
+  }
+  
+  /* Clear floats after the columns */
+  .row:after {
+    content: "";
+    display: table;
+    clear: both;
+  }
+ 
+
+
+  
+
+  html body.site.com-sppagebuilder.view-page.no-layout.no-task.itemid-101.it-it.ltr.sticky-header.layout-fluid.off-canvas-menu-init div.body-wrapper div.body-innerwrapper section#sp-bottom div.container div.row div#sp-bottom2.col-sm-6.col-md-6s
