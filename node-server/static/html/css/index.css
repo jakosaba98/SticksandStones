@@ -38,13 +38,13 @@ body {
     clear: both;
   }
 .jumbotron{
-  background-image: url("/node-server/static/html/images/bandieraVeneto.png");
+  background-image: url("/images/bandieraVeneto.png");
   background-position: center;
 background-size: cover;
 background-blend-mode: overlay;
 }
 div#assistenza{
-  background-image: url("/node-server/static/html/images/padovaduomo.jpg");
+  background-image: url("/images/padovaduomo.jpg");
   background-position: center;
 background-size: cover;
 background-blend-mode: color;
@@ -52,7 +52,7 @@ background-color: #0006;
 color: white;
 }
 div#ss{
-  background-image: url("/node-server/static/html/images/veronaautobus.jpg");
+  background-image: url("/images/veronaautobus.jpg");
   background-position: center;
 background-size: cover;
 background-blend-mode: color;
@@ -64,7 +64,7 @@ border-right-style: solid;
 border-right-color:#f60;
 }
 div#standard{
-  background-image: url("/node-server/static/html/images/venezia.jpg");
+  background-image: url("/images/venezia.jpg");
   background-position: center;
 background-size: cover;
 background-blend-mode: color;
@@ -76,10 +76,7 @@ footer{
   text-align: center;
 }
 .btn-secondary {
-  /* color: #fff;
-  background-color: #6c757d;
-  border-color: #6c757d; */
-  color: #fff;
+color: #fff;
 background-color:#007bff;
 border-color:#007bff;
 }
