@@ -38,25 +38,23 @@ xhr.onreadystatechange = () => {
       }
 }
 
-$('#autobus').on('change',(el)=>
-init(el.target.value)
-);
+$('#autobus').on('change',(el)=>init(el.target.value));
 
 function init(id){
-  console.log(id);
   locations=[];
   map.setExtent(start[id]);
   map.setZoom(16);
   redraw();
 
   //send a request and add new points
-  //clearInterval(repeatFunction);
   clearInterval(repeatFunction);
   repeatFunction=setInterval(sendRequests, repeat,id);
 }
 
 sendRequests = (id) => {
   let timestamp=new Date().getTime()-repeat;
+  document.getElementById('passengers').innerText=point.count;
+  document.getElementById('doors').innerText=point.doors?'aperte':'chiuse';
   xhr.open('GET','http://localhost/api/'+id+'/'+timestamp);
   xhr.send();
 }
@@ -92,8 +90,6 @@ function redraw() {
 
 function addLocation(point){
   locations.push(point);
-  document.getElementById('passengers').innerText=point.count;
-  document.getElementById('doors').innerText=point.doors?'aperte':'chiuse';
   let zoom=map.getZoom();
   map.setExtent(locations);
   map.setZoom(zoom);

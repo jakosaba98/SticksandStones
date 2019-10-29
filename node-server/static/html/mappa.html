@@ -67,6 +67,15 @@
       padding-right: 20px;
       text-align: right;
     }
+    .details{
+      text-align: center;
+      margin: 10px auto;
+      width: 50%;
+      border: 1px solid;
+    }
+    #passengers,#doors{
+      display:inline;
+    }
   </style>
   <!-- Stili pagina -->
   <link href="css/mappa.css" rel="stylesheet">
@@ -121,12 +130,9 @@
       <span id='span'></span>
     </div>
     <div id="map" class="map"></div>
-    <div class="row" style='width:50%;height:fit-content'>
-      <div class="col">Porte </div>
-      <div class="col" id="doors"></div>
-      <div class="col">Numero passeggeri: </div>
-      <div class="col" id="passengers"></div>
-    </div>
+
+    <div class="col details">Porte <div id="doors"></div></div>
+    <div class="col details">Numero passeggeri: <div id="passengers"></div></div>
 
     <footer class="container">
       <p>VVS - Veneto Vehicle Services S.p.a. - P.IVA. 03758364582 - Tel. 0421.034532 - info@vvs.pd.it - pec: vvs@pecstar.it</p>

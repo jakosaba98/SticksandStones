@@ -4,14 +4,14 @@ const fs = require('fs');
 const routes = async (fastify, options) => {
     fastify.get('/login.html', async (req, res) => {
         // return login page if not logged in
-        if (!req.session.user_id)
+        if (!req.session.name)
             res.sendFile('login.html')
         else
             res.redirect('/');
     })
     fastify.get('/registrazione.html', async (req, res) => {
         // return login page if not logged in
-        if (!req.session.user_id)
+        if (!req.session.name)
             res.sendFile('registrazione.html')
         else
             res.redirect('/');
@@ -41,8 +41,11 @@ const routes = async (fastify, options) => {
 }
 module.exports = routes;
 
-function setUser(session, file) {/*
-    let username=session.name
-    file.replace(/dog/gi, '');*/
+function setUser(session, file) {
+    if(session.name)
+    {
+        file=file.replace('<a class="dropdown-item" href="login.html">Accedi</a>','<a style="display: block;padding: .25rem 1.5rem;">'+session.name+'</a>');
+        file=file.replace('<a class="dropdown-item" href="registrazione.html">Registrati</a>', '<a class="dropdown-item" href="logout">Logout</a>');
+    }
     return file;
 }
