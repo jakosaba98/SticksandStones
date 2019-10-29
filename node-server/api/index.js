@@ -109,7 +109,7 @@ const routes = async (fastify, options) => {
 
     //user api
 
-    fastify.post('/login',async (req,res) => {/*
+    fastify.post('/login',async (req,res) => {
         const pool = new Pool(psqlconfig);
 
         pool.query('SELECT id,username,password,salt,account_type FROM Account WHERE username=$1', [req.body.username])
@@ -118,15 +118,15 @@ const routes = async (fastify, options) => {
             {
                 let password = bcrypt.hashSync(req.body.crypted_password, result.rows[0].salt)
                 if(password===result.rows[0].password)
-                {*/
+                {
                     // salva la sessione
-                    req.session.name = "cicciotest";//result.rows[0].username;
-                    req.session.auth = 1;//result.rows[0].account_type;
+                    req.session.name = result.rows[0].username;
+                    req.session.auth = result.rows[0].account_type;
                     // aggiorna last_login
-                    //pool.query('UPDATE Account SET last_login = $1 WHERE id = $2',[new Date().toISOString(),result.rows[0].id],()=>{
-                        // pool.end();
+                    pool.query('UPDATE Account SET last_login = $1 WHERE id = $2',[new Date().toISOString(),result.rows[0].id],()=>{
+                        pool.end();
                         res.send();
-                    })/*
+                    })
                 }
                 else
                 {
@@ -141,7 +141,7 @@ const routes = async (fastify, options) => {
             }
         })
         .catch(err => res.status(500).send(err))
-    });*/
+    });
     fastify.post('/register',async(req,res) => {
         const pool = new Pool(psqlconfig);
         let salt = bcrypt.genSaltSync(10);// generare il sale e salvarlo nel database
