@@ -14,7 +14,7 @@ namespace DataSender
     class Program
     {
         [Obsolete]
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             // configure Redis
             var redis = new RedisClient("127.0.0.1");
@@ -53,7 +53,7 @@ namespace DataSender
 
 
                     // send value to remote API
-                    var data = redis.BLPop(30, "sensors_data");
+                    var data = redis.BRPop(0, "sensors_data");
 
                     //flusso
                     var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream());
@@ -73,7 +73,7 @@ namespace DataSender
 
                 }
 
-                System.Threading.Thread.Sleep(1000);//1 sec ma non funziona per l'overflow
+                System.Threading.Thread.Sleep(4000);//4 sec
             }
 
 
