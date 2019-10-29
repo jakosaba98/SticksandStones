@@ -53,8 +53,6 @@ function init(id){
 
 sendRequests = (id) => {
   let timestamp=new Date().getTime()-repeat;
-  document.getElementById('passengers').innerText=point.count;
-  document.getElementById('doors').innerText=point.doors?'aperte':'chiuse';
   xhr.open('GET','http://localhost/api/'+id+'/'+timestamp);
   xhr.send();
 }
@@ -90,6 +88,8 @@ function redraw() {
 
 function addLocation(point){
   locations.push(point);
+  document.getElementById('passengers').innerText=point.count;
+  document.getElementById('doors').innerText=point.doors?'aperte':'chiuse';
   let zoom=map.getZoom();
   map.setExtent(locations);
   map.setZoom(zoom);
