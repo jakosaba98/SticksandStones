@@ -58,6 +58,10 @@ background-size: cover;
 background-blend-mode: color;
 background-color:#0006;
 color:white;
+border-left-style: solid;
+border-left-color:#f60;
+border-right-style: solid;
+border-right-color:#f60;
 }
 div#standard{
   background-image: url("venezia.jpg");
