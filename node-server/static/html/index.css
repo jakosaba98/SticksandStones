@@ -1,6 +1,7 @@
 /* Move down content because we have a fixed navbar that is 3.5rem tall */
 body {
     padding-top: 3.5rem;
+    background-color: #343a40;
   }
  div#testo {
     font-size: 30px;
@@ -46,11 +47,41 @@ div#assistenza{
   background-image: url("padovaduomo.jpg");
   background-position: center;
 background-size: cover;
-background-blend-mode: overlay;
-background-color: #f606;
+background-blend-mode: color;
+background-color: #0006;
+color: white;
 }
-
-
+div#ss{
+  background-image: url("veronaautobus.jpg");
+  background-position: center;
+background-size: cover;
+background-blend-mode: color;
+background-color:#0006;
+color:white;
+}
+div#standard{
+  background-image: url("venezia.jpg");
+  background-position: center;
+background-size: cover;
+background-blend-mode: color;
+background-color:#0006;
+color: white;
+}
+footer{
+  color: white;
+  text-align: center;
+}
+.btn-secondary {
+  /* color: #fff;
+  background-color: #6c757d;
+  border-color: #6c757d; */
+  color: #fff;
+background-color:#007bff;
+border-color:#007bff;
+}
+div.row h2{
+  text-align: center;
+}
   
 
   html body.site.com-sppagebuilder.view-page.no-layout.no-task.itemid-101.it-it.ltr.sticky-header.layout-fluid.off-canvas-menu-init div.body-wrapper div.body-innerwrapper section#sp-bottom div.container div.row div#sp-bottom2.col-sm-6.col-md-6s
