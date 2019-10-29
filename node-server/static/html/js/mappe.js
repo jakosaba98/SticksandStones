@@ -83,6 +83,7 @@ function redraw() {
   if(p)
   {
     ctx.stroke();
+    ctx.lineWidth = 3;
     ctx.beginPath();
     ctx.arc(p.x,p.y,10,0,360);// draw a circle in current location
   }
@@ -91,6 +92,8 @@ function redraw() {
 
 function addLocation(point){
   locations.push(point);
+  document.getElementById('passengers').innerText=point.count;
+  document.getElementById('doors').innerText=point.doors?'aperte':'chiuse';
   let zoom=map.getZoom();
   map.setExtent(locations);
   map.setZoom(zoom);
