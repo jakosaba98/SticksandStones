@@ -24,7 +24,7 @@ namespace DataReader
             // init sensors
             List<ISensor> sensors1 = new List<ISensor>
             {
-                new GPSSensor(idtreviso),
+                new GPSSensor(idtreviso, d1),
                 d1,
                 new PassCount(d1,2)
             };
@@ -36,7 +36,7 @@ namespace DataReader
             // init sensors
             List<ISensor> sensors2 = new List<ISensor>
             {
-                new GPSSensor(idpadova),
+                new GPSSensor(idpadova, d2),
                 d2,
                 new PassCount(d2,2)
             };
@@ -47,9 +47,20 @@ namespace DataReader
             // init sensors
             List<ISensor> sensors3 = new List<ISensor>
             {
-                new GPSSensor(idverona),
+                new GPSSensor(idverona, d3),
                 d3,
                 new PassCount(d3,2)
+            };
+
+            //*****VICENZA*****
+            int idvicenza = 4;
+            var d4 = new DoorSensor();
+            // init sensors
+            List<ISensor> sensors4 = new List<ISensor>
+            {
+                new GPSSensor(idvicenza, d4),
+                d4,
+                new PassCount(d4,2)
             };
 
             while (true)
@@ -57,6 +68,7 @@ namespace DataReader
                 var data1 = ToJSON(idtreviso);
                 var data2 = ToJSON(idpadova);
                 var data3 = ToJSON(idverona);
+                var data4 = ToJSON(idvicenza);
 
                 foreach (Sensor sensor1 in sensors1)
                 {
@@ -73,16 +85,23 @@ namespace DataReader
                     data3 += sensor3.ToJson();
                 }
 
+                foreach (Sensor sensor4 in sensors4)
+                {
+                    data4 += sensor4.ToJson();
+                }
+
                 Console.WriteLine(data1);
                 Console.WriteLine(data2);
                 Console.WriteLine(data3);
+                Console.WriteLine(data4);
 
-                 //push to redis queue
+                //push to redis queue
                 redis.LPush("sensors_data", data1);
                 redis.LPush("sensors_data", data2);
                 redis.LPush("sensors_data", data3);
+                redis.LPush("sensors_data", data4);
 
-                System.Threading.Thread.Sleep(1000);
+                System.Threading.Thread.Sleep(500);
 
             }
             

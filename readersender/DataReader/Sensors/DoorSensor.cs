@@ -4,7 +4,7 @@ namespace DataReader.Sensors
 {
     class DoorSensor : Sensor
     {
-        private bool current_doors;
+        public bool current_doors;
         public DoorSensor()
         {
             current_doors = false;
@@ -13,7 +13,7 @@ namespace DataReader.Sensors
         override public string GetValue()
         {
             Random random = new Random();
-            if (random.Next(1, 15) == 1) //6,5% che sia aperta
+            if (random.Next(1, 8) == 1) //6,5% che sia aperta
             {
                 current_doors = !current_doors;
             }

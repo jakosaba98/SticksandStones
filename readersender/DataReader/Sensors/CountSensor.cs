@@ -20,16 +20,18 @@ namespace DataReader.Sensors
 
         public void Controller()
         {
+
+            //****DIVIDERE PER ID OGNI AUTOBUS*****, ANCHE IN DOOR SENSOR
             Random random = new Random();
 
-            if (d.GetValue()=="true")
+            if (d.GetValue() == "true")
             {
                 if (random.Next(1, 3) == 1) //33% che un passeggero salga
                 {
                     GetOn();
                 }
 
-                if (random.Next(1, 4) == 1 && passengers > 0) //25% che un passeggero scenda
+                if (random.Next(1, 3) == 1 && passengers > 0) //33% che un passeggero scenda
                 {
                     GetOff();
                 }

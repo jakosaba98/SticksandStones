@@ -73,7 +73,7 @@ namespace DataSender
 
                 }
 
-                System.Threading.Thread.Sleep(4000);//4 sec
+                System.Threading.Thread.Sleep(500);//500*4 = 1 sec Tutti i bus 
             }
 
 
