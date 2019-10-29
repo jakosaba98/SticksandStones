@@ -51,11 +51,12 @@ function init(id){
 
   //send a request and add new points
   //clearInterval(repeatFunction);
-  repeatFunction=setInterval(() => {
-    let timestamp=new Date().getTime()-repeat;
-    xhr.open('GET','http://localhost/api/'+id+'/'+timestamp);
-    xhr.send();
-  }, repeat);
+  if(!repeatFunction)
+    repeatFunction=setInterval(() => {
+      let timestamp=new Date().getTime()-repeat;
+      xhr.open('GET','http://localhost/api/'+id+'/'+timestamp);
+      xhr.send();
+    }, repeat);
 }
 
 function redraw() {
