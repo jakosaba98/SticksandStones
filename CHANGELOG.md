@@ -6,11 +6,19 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- PSQL tables with user management and hours
-- Error pages
+- PSQL tables with hours of service
 
 ### Changed
-- Javascript for login and registration
+- Bug solve in movements in C#
+
+# 2019-10-29
+### Added
+- Error pages
+- 4 different buses ("Treviso", "Padova", "Verona", "Vicenza")
+- Current state of doors (open or closed) and number of passengers
+
+### Changed
+- Front-end Javascript for login and registration
 - More accuracy in movement C#
 
 # 2019-10-27

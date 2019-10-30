@@ -152,7 +152,7 @@ const routes = async (fastify, options) => {
         pool.query('INSERT INTO Account(username,password,email,salt,account_type,created_on) VALUES($1,$2,$3,$4,$5,NOW())',
                             [req.body.username,hash,req.body.email,salt,level])
         .then(() =>{
-            res.send('Registrazione effettuata con successo!');
+            res.redirect('/');
         })
         .catch(err => res.status(500).send(err))});
 }
