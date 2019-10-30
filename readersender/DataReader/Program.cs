@@ -20,47 +20,47 @@ namespace DataReader
 
             //*****TREVISO*****
             int idtreviso = 1;
-            var d1 = new DoorSensor();
+            var d1 = new DoorSensor(idtreviso);
             // init sensors
             List<ISensor> sensors1 = new List<ISensor>
             {
                 new GPSSensor(idtreviso, d1),
                 d1,
-                new PassCount(d1,2)
+                new PassCount(d1,2, idtreviso)
             };
             
 
             //*****PADOVA*****
             int idpadova = 2;
-            var d2 = new DoorSensor();
+            var d2 = new DoorSensor(idpadova);
             // init sensors
             List<ISensor> sensors2 = new List<ISensor>
             {
                 new GPSSensor(idpadova, d2),
                 d2,
-                new PassCount(d2,2)
+                new PassCount(d2,2, idpadova)
             };
 
             //*****VERONA*****
             int idverona = 3;
-            var d3 = new DoorSensor();
+            var d3 = new DoorSensor(idverona);
             // init sensors
             List<ISensor> sensors3 = new List<ISensor>
             {
                 new GPSSensor(idverona, d3),
                 d3,
-                new PassCount(d3,2)
+                new PassCount(d3,2, idverona)
             };
 
             //*****VICENZA*****
             int idvicenza = 4;
-            var d4 = new DoorSensor();
+            var d4 = new DoorSensor(idvicenza);
             // init sensors
             List<ISensor> sensors4 = new List<ISensor>
             {
                 new GPSSensor(idvicenza, d4),
                 d4,
-                new PassCount(d4,2)
+                new PassCount(d4,2, idvicenza)
             };
 
             while (true)

@@ -11,13 +11,15 @@ namespace DataReader.Sensors
         private List<CountSensor> vett;
         private int n;
         private DoorSensor d;
-        public PassCount(DoorSensor d,int n)
+        private int id;
+        public PassCount(DoorSensor d,int n, int id)
         {
             this.d = d;
             this.n = n;
+            this.id = id;
             this.vett = new List<CountSensor>();
             for(int i=0;i<n;i++)
-                vett.Add(new CountSensor(d));
+                vett.Add(new CountSensor(d, id));
         }
         override public string GetValue()
         {

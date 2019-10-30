@@ -303,7 +303,7 @@ namespace DataReader.Sensors
             if (id == 1)
             {
                 //Treviso
-                if (door.current_doors)//se le porte sono aperte non incrementare le coordinate ( non si muove )
+                if (door.current_doors1)//se le porte sono aperte non incrementare le coordinate ( non si muove )
                 {
 
                 }
@@ -322,7 +322,7 @@ namespace DataReader.Sensors
             else if (id == 2)
             {
                 //Padova
-                if (door.current_doors)//se le porte sono aperte non incrementare le coordinate ( non si muove )
+                if (door.current_doors2)//se le porte sono aperte non incrementare le coordinate ( non si muove )
                 {
 
                 }
@@ -340,7 +340,7 @@ namespace DataReader.Sensors
             else if (id == 3)
             {
                 //Verona
-                if (door.current_doors)//se le porte sono aperte non incrementare le coordinate ( non si muove )
+                if (door.current_doors3)//se le porte sono aperte non incrementare le coordinate ( non si muove )
                 {
 
                 }
@@ -358,7 +358,7 @@ namespace DataReader.Sensors
             else if(id == 4)
             {
                 //Vicenza
-                if (door.current_doors)//se le porte sono aperte non incrementare le coordinate ( non si muove )
+                if (door.current_doors4)//se le porte sono aperte non incrementare le coordinate ( non si muove )
                 {
 
                 }
@@ -382,7 +382,7 @@ namespace DataReader.Sensors
             if (id == 1)
             {
                 //Treviso
-                if (door.current_doors)//se le porte sono aperte non incrementare le coordinate ( non si muove )
+                if (door.current_doors1)//se le porte sono aperte non incrementare le coordinate ( non si muove )
                 {
 
                 }
@@ -400,7 +400,7 @@ namespace DataReader.Sensors
             else if (id == 2)
             {
                 //Padova
-                if (door.current_doors)//se le porte sono aperte non incrementare le coordinate ( non si muove )
+                if (door.current_doors2)//se le porte sono aperte non incrementare le coordinate ( non si muove )
                 {
 
                 }
@@ -418,7 +418,7 @@ namespace DataReader.Sensors
             else if (id == 3)
             {
                 //Verona
-                if (door.current_doors)//se le porte sono aperte non incrementare le coordinate ( non si muove )
+                if (door.current_doors3)//se le porte sono aperte non incrementare le coordinate ( non si muove )
                 {
 
                 }
@@ -436,7 +436,7 @@ namespace DataReader.Sensors
             else if (id == 4)
             {
                 //Vicenza
-                if (door.current_doors)//se le porte sono aperte non incrementare le coordinate ( non si muove )
+                if (door.current_doors4)//se le porte sono aperte non incrementare le coordinate ( non si muove )
                 {
 
                 }
