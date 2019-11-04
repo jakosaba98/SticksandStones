@@ -1,59 +1,40 @@
 <!DOCTYPE html>
 <html lang="en">
-
 <head>
   <meta http-equiv="content-type" content="text/html; charset=UTF-8">
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta name="description" content="">
   <meta name="generator" content="Jekyll v3.8.5">
-  <title>VVS - Veneto Vehicle Services</title>
+  <title>VVS - Mappa</title>
 
   <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/jumbotron/">
 
   <link rel="apple-touch-icon" sizes="57x57" href="/images/apple-icon-57x57.png">
- <link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png">
- <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png">
- <link rel="apple-touch-icon" sizes="76x76" href="/images/apple-icon-76x76.png">
- <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-icon-114x114.png">
- <link rel="apple-touch-icon" sizes="120x120" href="/images/apple-icon-120x120.png">
- <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-icon-144x144.png">
- <link rel="apple-touch-icon" sizes="152x152" href="/images/apple-icon-152x152.png">
- <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png">
- <link rel="icon" type="image/png" sizes="192x192"  href="/images/android-icon-192x192.png">
- <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
- <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
- <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
- <link rel="manifest" href="/images/manifest.json">
- <meta name="msapplication-TileColor" content="#ffffff">
- <meta name="msapplication-TileImage" content="/images/ms-icon-144x144.png">
- <meta name="theme-color" content="#ffffff">
+  <link rel="apple-touch-icon" sizes="60x60" href="/images/apple-icon-60x60.png">
+  <link rel="apple-touch-icon" sizes="72x72" href="/images/apple-icon-72x72.png">
+  <link rel="apple-touch-icon" sizes="76x76" href="/images/apple-icon-76x76.png">
+  <link rel="apple-touch-icon" sizes="114x114" href="/images/apple-icon-114x114.png">
+  <link rel="apple-touch-icon" sizes="120x120" href="/images/apple-icon-120x120.png">
+  <link rel="apple-touch-icon" sizes="144x144" href="/images/apple-icon-144x144.png">
+  <link rel="apple-touch-icon" sizes="152x152" href="/images/apple-icon-152x152.png">
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-icon-180x180.png">
+  <link rel="icon" type="image/png" sizes="192x192"  href="/images/android-icon-192x192.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="96x96" href="/images/favicon-96x96.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
+  <link rel="manifest" href="/images/manifest.json">
+  <meta name="msapplication-TileColor" content="#ffffff">
+  <meta name="msapplication-TileImage" content="/images/ms-icon-144x144.png">
+  <meta name="theme-color" content="#ffffff">
 
   <!-- Collegamento Bootstrap core CSS -->
   <link href="https://getbootstrap.com/docs/4.3/dist/css/bootstrap.min.css" rel="stylesheet"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
-
-  <style>
-    .bd-placeholder-img {
-      font-size: 1.125rem;
-      text-anchor: middle;
-      -webkit-user-select: none;
-      -moz-user-select: none;
-      -ms-user-select: none;
-      user-select: none;
-    }
-
-    @media (min-width: 768px) {
-      .bd-placeholder-img-lg {
-        font-size: 3.5rem;
-      }
-    }
-  </style>
   <!-- Stili pagina -->
-  <link href="css/index.css" rel="stylesheet">
+  <link href="css/mappa.css" rel="stylesheet">
 </head>
-
 <body>
     <!--Barra fissa-->
     <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
@@ -74,7 +55,7 @@
           <li class="nav-item">
             <a class="nav-link" href="https://www.google.it/maps/dir/Padova,+Provincia+di+Padova//@45.366165,11.7508741,12z/data=!4m9!4m8!1m5!1m1!1s0x477eda5841ab30cf:0xc18236edaa1a2e2c!2m2!1d11.8767611!2d45.4064349!1m0!3e3?hl=it">Tratte e orari</a>
           </li>
-          <li class="nav-item">
+          <li class="nav-item active">
             <a class="nav-link" href="mappa.html">Mappa</a>
           </li>
           <li class="nav-item dropdown">
@@ -91,21 +72,30 @@
         </ul>
       </div>
     </nav>
-    <div class="jumbotron" style="margin-top: 100px">
-      <div class="container">
-      <h1>Errore 404 - Pagina non trovata!</h1>
-      <h4>Siamo spiacenti! Probabilmente il link è rotto o la pagina che stai cercando è stata rimossa.</h4>
-      </div>
+    <div id="autobus">
+      <span id='span'>Scegli un autobus</span>
+      <select style="flex:1" class="browser-default custom-select">
+        <option disabled selected></option>
+        <option value="1">Autobus Treviso</option>
+        <option value="2">Autobus Padova</option>
+        <option value="3">Autobus Verona</option>
+        <option value="4">Autobus Vicenza</option>
+      </select>
+      <span id='span'></span>
     </div>
+    <div id="map" class="map"></div>
 
-  <footer class="container">
+    <div class="col details">Porte <div id="doors"></div></div>
+    <div class="col details">Numero passeggeri: <div id="passengers"></div></div>
+
+    <footer class="container">
       <p>VVS - Veneto Vehicle Services S.p.a. - P.IVA. 03758364582 - Tel. 0421.034532 - info@vvs.pd.it - pec: vvs@pecstar.it</p>
-    <p>powered by © Sticks & Stones 2019-2020</p>
-  </footer>
+      <p>powered by © Sticks & Stones 2019-2020</p>
+    </footer>
   <!-- Collegamenti agli script -->
   <script src="script_bootstrap/jquery-3.js"></script>
   <script src="script_bootstrap/bootstrap.js"></script>
-
+  <script src="js/modestmaps.min.js"></script>
+  <script src="js/mappe.js"></script>
 </body>
-
 </html>
