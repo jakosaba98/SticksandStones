@@ -22,8 +22,8 @@ fastify.register(require('fastify-websocket'),{
     path: '/bus', // we accept only connections matching this path
     verifyClient: function (info, next) {
       try{
-        console.log(info);
-        fastify.jwt.verify(info.req.token);
+        token=info.req.url.replace('/bus?token=','');
+        fastify.jwt.verify(token);
         next(true); // the connection is allowed
       }
       catch(e){
