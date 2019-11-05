@@ -21,17 +21,15 @@ fastify.register(require('fastify-websocket'),{
   options: {
     path: '/bus', // we accept only connections matching this path
     verifyClient: function (info, next) {
-      let cookie = info.req.headers.cookie.replace(cookieName+'=','')
-      fastify.session.store.get(cookie,(error,res)=>{
-        if(res)
-          next(true);
-        else
-          next(false);
-      });/*
-      if (info.req.headers['x-fastify-header'] !== 'fastify is awesome !') {
-        return next(false) // the connection is not allowed
-      }*/
-      //next(true) // the connection is allowed
+      try{
+        console.log(info);
+        fastify.jwt.verify(info.req.token);
+        next(true); // the connection is allowed
+      }
+      catch(e){
+        console.log(e);
+        next(false); // the connection is not allowed
+      }
     }
   }
 });

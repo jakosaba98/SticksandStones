@@ -6,6 +6,7 @@ const start={
   3:[{lat:45.438712,lon:10.990199}],
   4:[{lat:45.5496477,lon:11.55359}],
 };
+let token=null;
 let repeatFunction=null;
 let provider = new com.modestmaps.TemplatedLayer('http://tile.openstreetmap.org/{Z}/{X}/{Y}.png');
 let map = new com.modestmaps.Map('map', provider); 
@@ -49,6 +50,7 @@ function init(id){
   redraw();
 
   //get data from a websocket
+  // BUT FIRST ASK FOR A TOKEN!!
   if(exampleSocket && exampleSocket.readyState==WebSocket.OPEN)
   {
     exampleSocket.send(id);
