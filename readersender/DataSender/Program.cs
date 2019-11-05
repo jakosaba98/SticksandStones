@@ -14,7 +14,7 @@ namespace DataSender
     class Program
     {
         [Obsolete]
-        static void Main(string[] args)
+        static async Task Main(string[] args)
         {
             // configure Redis
             var redis = new RedisClient("127.0.0.1");
@@ -44,7 +44,7 @@ namespace DataSender
 
 
                     //autenticazione e connessione macchina
-                    var httpWebRequest = (HttpWebRequest)WebRequest.Create(dns + "/api");
+                    var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://" + dns + "/api");
                     httpWebRequest.PreAuthenticate = true;
                     httpWebRequest.Headers.Add("Authorization", "Bearer " + token);
                     httpWebRequest.Accept = "application/json";
@@ -53,7 +53,7 @@ namespace DataSender
 
 
                     // send value to remote API
-                    var data = redis.BLPop(30, "sensors_data");
+                    var data = redis.BRPop(0, "sensors_data");
 
                     //flusso
                     var streamWriter = new StreamWriter(httpWebRequest.GetRequestStream());
@@ -73,7 +73,7 @@ namespace DataSender
 
                 }
 
-                System.Threading.Thread.Sleep(1000);//1 sec ma non funziona per l'overflow
+                System.Threading.Thread.Sleep(500);//500*4 = 1 sec Tutti i bus 
             }
 
 
@@ -84,19 +84,43 @@ namespace DataSender
 
         public static bool CheckForConnection(string dns)
         {
+            //Console.WriteLine("http://" + dns + "/api/ping");
+            var request = (HttpWebRequest)WebRequest.Create("http://" + dns + "/api/ping");
+            request.Method = "GET";
+            var response = (HttpWebResponse)request.GetResponse();
+
+            ;
+            if((int)response.StatusCode == 204)
+            {
+                return true;
+            }
+            else
+            {
+                Console.WriteLine("Accesso Negato");
+                return false;
+            }
+
+
+
+
+            /*
             try
             {
                 using (var client = new WebClient())
                 using (client.OpenRead(dns+"/api/ping")) //richiamare api ping
                 {
+                    Console.WriteLine("Accesso");
                     return true;
                 }
             }
             catch
             {
+                Console.WriteLine("Accesso Negato");
                 return false;
             }
+            */
         }
+
 
         [Obsolete]
         public static string[] GetConfig()
@@ -117,7 +141,7 @@ namespace DataSender
             var dns = config[0]; //dns pubblico statico ec2
 
                 //autenticazione e connessione macchina
-                var httpWebRequest = (HttpWebRequest)WebRequest.Create(dns + "/api/gettoken");
+                var httpWebRequest = (HttpWebRequest)WebRequest.Create("http://" + dns + "/api/gettoken");
                 httpWebRequest.ContentType = "application/json";
                 httpWebRequest.Method = "POST";
 

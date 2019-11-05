@@ -33,18 +33,8 @@ fastify.decorate('authenticate',async(req,res)=>{
 
 fastify.register(require('./api'),{ prefix: '/api' });
 
-fastify.setErrorHandler((error, request, reply)=>{
-  if(error.message==='Not Found')// statusCode 404
-  {
-    reply.sendFile('error404.html')
-  }
-  else
-  if(error.message==='Internal Server Error')// statusCode 500
-  {
-    reply.sendFile('error500.html')
-  }
-  else
-    reply.send(error);
+fastify.setNotFoundHandler((req, rep) => {
+  rep.sendFile('error404.html')
 })
 
 fastify.register(require('./static/public'),{ prefix: '/' });

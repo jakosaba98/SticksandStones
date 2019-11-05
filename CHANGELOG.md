@@ -6,11 +6,21 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- Home Page
+- PSQL tables with user management and hours
 - Error pages
 
 ### Changed
 - Javascript for login and registration
+- More accuracy in movement C#
+
+# 2019-10-27
+### Added
+- Home Page and relative HTML pages
+- Real-time update of bus position in map
+
+### Changed
+- Javascript for login and registration
+
 
 ## 2019-06-04
 ### Added
