@@ -1,6 +1,5 @@
 <!doctype html>
 <html lang="en">
-
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
@@ -34,9 +33,7 @@
   <link href="css/mio_custom_stile.css" rel="stylesheet">
 
 </head>
-
 <body class="text-center">
-
 <!--Barra fissa-->
 <nav class="navbar navbar-expand-md navbar-dark fixed-top bg-dark">
     <a class="navbar-brand" href="index.htm"> <img src="/images/signinfoto.jpg" class="img-fluid" alt="Responsive image" width="60px" height="60px"> </a>
@@ -83,32 +80,30 @@
     <label for="nomeutente" class="sr-only">Nome Utente</label>
     <input type="text" id="Utente" name="utente" class="form-control" placeholder="Nome utente" required autofocus>
 
-
-
-
     <label for="inputPassword" class="sr-only">Password</label>
-    <input type="password" onclick="myFunction()" id="inputPassword" name="password" class="form-control" placeholder="Password"
+    <input type="password" id="inputPassword" name="password" class="form-control" placeholder="Password"
       required>
      
     <label for="inputPassword2" class="sr-only">Conferma password</label>
     <input type="password" id="inputPassword2" name="password2" class="form-control" placeholder="Conferma password" required>
 
-
-
     <div class="checkbox mb-3">
       <label>
-        <input type="checkbox" value="remember-me" name="accettatermini"> Accetta i termini e acconsenti
+        <input type="checkbox" id='termini' value="remember-me" name="accettatermini"> Accetta i termini e acconsenti
       </label>
     </div>
 <br>
 
-    <button class="btn btn-lg btn-primary btn-block" type="submit">Registrati</button>
+    <button id='submit' class="btn btn-lg btn-primary btn-block" type="button">Registrati</button>
+    <div id="error"></div>
     <p class="mt-5 mb-3 text-muted">&copy;S&S 2019-2020</p>
   </form>
  
   <!-- Collegamenti agli script -->
-  <script src="script_bootstrap/jquery-3.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha512/0.8.0/sha512.min.js"></script>
+  <script src="js/registrazione.js"></script>
+  <!-- Collegamenti agli script -->
   <script src="script_bootstrap/bootstrap.js"></script>
 </body>
-
 </html>

@@ -6,8 +6,26 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ## [Unreleased]
 ### Added
-- PSQL tables with user management and hours
+- PSQL tables with hours of service
+- Websocket implementation for get real time position of the bus
+
+### Changed
+- Bug solve in movements in C#
+
+# 2019-10-29
+### Added
 - Error pages
+- 4 different buses ("Treviso", "Padova", "Verona", "Vicenza")
+- Current state of doors (open or closed) and number of passengers
+
+### Changed
+- Front-end Javascript for login and registration
+- More accuracy in movement C#
+
+# 2019-10-27
+### Added
+- Home Page and relative HTML pages
+- Real-time update of bus position in map
 
 ### Changed
 - Javascript for login and registration
@@ -20,6 +38,7 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 
 ### Changed
 - Javascript for login and registration
+
 
 
 ## 2019-06-04

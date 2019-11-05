@@ -6,6 +6,7 @@ const start={
   3:[{lat:45.438712,lon:10.990199}],
   4:[{lat:45.5496477,lon:11.55359}],
 };
+let token=null;
 let repeatFunction=null;
 let provider = new com.modestmaps.TemplatedLayer('http://tile.openstreetmap.org/{Z}/{X}/{Y}.png');
 let map = new com.modestmaps.Map('map', provider); 
@@ -23,6 +24,7 @@ map.addCallback('resized', function() {
   redraw();
 });
 
+/*
 let xhr=new XMLHttpRequest();
 xhr.onreadystatechange = () => {
   if (xhr.readyState === 4)
@@ -30,13 +32,14 @@ xhr.onreadystatechange = () => {
           let obj = JSON.parse(xhr.response);
           for(let i=obj.length-1;i>=0;i--)
           {
-            addLocation(obj[i]);
+            addLocation(obj[i]);//HEREEEEEE
           }
       }
       catch (e) {
           return;
       }
 }
+*/
 
 $('#autobus').on('change',(el)=>init(el.target.value));
 
@@ -46,16 +49,39 @@ function init(id){
   map.setZoom(16);
   redraw();
 
-  //send a request and add new points
-  clearInterval(repeatFunction);
-  repeatFunction=setInterval(sendRequests, repeat,id);
-}
+  //get data from a websocket
+  // BUT FIRST ASK FOR A TOKEN!!
+  if(exampleSocket && exampleSocket.readyState==WebSocket.OPEN)
+  {
+    exampleSocket.send(id);
+    console.log('CAMBIO ID '+id);
+  }
+  else
+  {
+    var exampleSocket = new WebSocket("ws://localhost:80/bus");
+    exampleSocket.addEventListener('message', function (event) {
+        console.log(event.data);
+    });
+    exampleSocket.addEventListener('open', function (event) {
+      console.log('APERTO')
+      exampleSocket.send(id);
+    });
+    exampleSocket.addEventListener('close', function (event) {
+      console.log('CHIUSO')
+    });
+  }
 
+  //send a request and add new points
+  //clearInterval(repeatFunction);
+  //repeatFunction=setInterval(sendRequests, repeat,id);
+}
+/*
 sendRequests = (id) => {
   let timestamp=new Date().getTime()-repeat;
   xhr.open('GET','http://localhost/api/'+id+'/'+timestamp);
   xhr.send();
 }
+*/
 
 function redraw() {
   let ctx = canvas.getContext('2d');
