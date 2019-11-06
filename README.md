@@ -9,36 +9,47 @@ These instructions will get you a copy of the project up and running on your loc
 
 ### Prerequisites
 
-- OS Android (from 4.1), iOS or Windows, (we need to run some tests! This is an estimation)
-- A browser or ours app,
-- An Internet connection,
-- GPS location,
+- A browser
+- ~~An Internet connection~~
+- NodeJS, Redis, InfluxDB & Postgres
+- .NET for running .cs files
 
-(What things you need to install the software and how to install them)
+To download the needed software follow these links from official sites:
+- [NodeJS (v10.15.3)](https://nodejs.org/en/download/)
+- [Redis (v5.0)](https://redis.io/download)
+- [InfluxDB (v1.7.9)](https://portal.influxdata.com/downloads/)
+- [Postgres (v12)](https://www.postgresql.org/download/)
+- [.NET (v4.7.2)](https://dotnet.microsoft.com/download/dotnet-framework)
 
-```
-
-
-```
+We don't guarantee that works with newer version that specified before. You can also download and run these applications on Docker containers.
 
 ### Installing
 
 
-A step by step series of examples that tell you how to get a development env running
-
-Say what the step will be
+Download this repository and install node_modules
 
 ```
-Give the example
+git clone https://github.com/jakosaba98/SticksandStones/
+npm install
 ```
 
-And repeat
+Run the server
 
 ```
-until finished
+cd node-server
+npm start
 ```
 
-End with an example of getting some data out of the system or using it for a little demo
+Run simulation of movements
+
+```
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe .\readersender\DataReader\Program.cs &
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe .\readersender\DataSender\Program.cs
+```
+
+Go to http://localhost, do login and move on maps page. Then choose your bus to know his real-time position.
+
+![Screenshot of maps page](./node-server/static/html/images/screen_mappa.jpg)
 
 ## Running the tests
 
@@ -48,7 +59,7 @@ It's important to test API calls and correct insert of data
 
 Test a connection to DB (a correct response returns code 204)
 ```
-curl http://sandsloadbalancer-620921771.eu-west-1.elb.amazonaws.com/ping
+curl http://localhost/ping
 ```
 
 ## Deployment
@@ -57,9 +68,9 @@ We will write a guide and publish the files needed and where to save them
 
 ## Built With
 
-* [AWS](https://aws.amazon.com) Amazon EC2, Load Balancer - Server where we store data and website
+* ~~[AWS](https://aws.amazon.com) Amazon EC2, Load Balancer - Server where we store data and website~~
 * [Visual Studio Code](https://code.visualstudio.com/) - Framework used to write HTML, CSS, Javascript code
-* [InfluxDB](https://www.influxdata.com/) - Database for storing autobus data
+* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) - Framework used to write C# code for GPS simulators
 
 
 ## Contributing
@@ -80,3 +91,7 @@ We use [SemVer](http://semver.org/) for versioning. For the versions available, 
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://en.wikipedia.org/wiki/MIT_License) for details
+
+## Important Notes
+
+We planned to run our server online using AWS services, but our volume was cancelled one week before we planned stable version release. We changed all configurations to make it work properly in time, so we decided to cancel deployment of a public online server and a future develop of a dedicated application for Android devices.
