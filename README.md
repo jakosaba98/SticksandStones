@@ -4,51 +4,52 @@
 Here there are all files of this project
 
 ## Getting Started
-S&S is our new Start-up created to analyze and improve the company's managment and keeping customer's benefit optimal.
+S&S is our new Startup created to analyze and improve the company's managment and keeping customer's benefit optimal.
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
 ### Prerequisites
 
-- OS Android (from 4.1), iOS or Windows
-- A browser (Chrome,Safari,Opera,Firefox...),
-- An Internet connection
-- A computer with npm & nodejs, Visual Studio Community 19 (for execute .cs files), redis, influxDB and postgres installed
+- A browser
+- ~~An Internet connection~~
+- NodeJS, Redis, InfluxDB & Postgres
+- .NET for running .cs files
 
-If you are on windows or mac you can download npm from [https://nodejs.org/en/download/] and download Visual Studio from [https://visualstudio.microsoft.com/free-developer-offers/]
+To download the needed software follow these links from official sites:
+- [NodeJS (v10.15.3)](https://nodejs.org/en/download/)
+- [Redis (v5.0)](https://redis.io/download)
+- [InfluxDB (v1.7.9)](https://portal.influxdata.com/downloads/)
+- [Postgres (v12)](https://www.postgresql.org/download/)
+- [.NET (v4.7.2)](https://dotnet.microsoft.com/download/dotnet-framework)
 
-Also you can install node and npm via package manager, for more information check this article [https://nodejs.org/en/download/package-manager/]
-
-It's easiest to install redis, influx and postgres in instances of docker, however it's possible to download from official sites:
-[https://redis.io/download]
-[https://portal.influxdata.com/downloads/]
-[https://www.postgresql.org/download/]
+We don't guarantee that works with newer version that specified before. You can also download and run these applications on Docker containers.
 
 ### Installing
 
-First of all clone this repository
+
+Download this repository and install node_modules
 
 ```
-git clone https://github.com/jakosaba98/SticksandStones
-```
-
-then install node_modules typing on the root of the directory
-
-```
+git clone https://github.com/jakosaba98/SticksandStones/
 npm install
 ```
-Run redis, influx and postgresql instances.
 
-To run your webserver type inside node_server dir
+Run the server
 
 ```
-node server.js
+cd node-server
+npm start
 ```
 
-Run in Visual Studio DataReader/Program.cs, fill for a minute or so Redis stack and then run DataSender/Program.cs
+Run simulation of movements
 
-Open your browser and go to http://localhost , do the login, open Mappe, choose your bus and you will see real-time* the position of selected bus
+```
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe .\readersender\DataReader\Program.cs &
+C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe .\readersender\DataSender\Program.cs
+```
 
-* currently C# simulate the position of every bus, the idea is to load only .cs files on a Raspberry and read data from a GPS sensor and other bus sensors
+Go to http://localhost, do login and move on maps page. Then choose your bus to know his real-time position.
+
+![Screenshot of maps page](./node-server/static/html/images/screen_mappa.jpg)
 
 ## Running the tests
 
@@ -58,8 +59,9 @@ It's important to test API calls and correct insert of data
 
 Test a connection to DB (a correct response returns code 204)
 ```
-curl http://localhost/api/ping
+curl http://localhost/ping
 ```
+
 ## Deployment
 
 We will write a guide and publish the files needed and where to save them
@@ -68,19 +70,15 @@ We will write a guide and publish the files needed and where to save them
 
 * ~~[AWS](https://aws.amazon.com) Amazon EC2, Load Balancer - Server where we store data and website~~
 * [Visual Studio Code](https://code.visualstudio.com/) - Framework used to write HTML, CSS, Javascript code
-* [Visual Studio Community](https://visualstudio.microsoft.com/) - Framework used to write C# code
-* [NodeJS](https://nodejs.org/) - Used for running local server
-* [InfluxDB](https://www.influxdata.com/) - Database for storing autobus data
-* [Postgres](https://www.postgresql.org/) - Database for storing users and hours
-* [Redis](https://redis.io/) - Used as a database, cache and message broker
+* [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) - Framework used to write C# code for GPS simulators
+
+
+## Contributing
+
 
 ## Versioning
 
-We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/jakosaba98/SticksandStones/tags).
-
-## Important Notes
-
-We planned to use AWS instances to store the server and make it accessible everywhere, also we prepared an Android app to make easier use the program from cellular phone, nevertheless in this summer we lost our AWS volume and we couldn't restore our machine.
+We use [SemVer](http://semver.org/) for versioning. For the versions available, see the [tags on this repository](https://github.com/jakosaba98/SticksandStones/tags). 
 
 ## Authors
 
@@ -93,3 +91,7 @@ We planned to use AWS instances to store the server and make it accessible every
 ## License
 
 This project is licensed under the MIT License - see the [LICENSE.md](https://en.wikipedia.org/wiki/MIT_License) for details
+
+## Important Notes
+
+We planned to run our server online using AWS services, but our volume was cancelled one week before we planned stable version release. We changed all configurations to make it work properly in time, so we decided to cancel deployment of a public online server and a future develop of a dedicated application for Android devices.
