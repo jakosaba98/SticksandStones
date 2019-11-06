@@ -1,33 +1,6 @@
 const Influx = require('influx');
-const config = require('../config.json');
-const { Pool } = require('pg')
-const psqlconfig = {
-    user: config.postgres,
-    host: config.ipaddress,
-    database: config.dbpostgres,
-    password: config.postgres
-}
-const influxConfig = {
-    host: config.ipaddress,
-    database: config.databasename,
-    port: config.port,
-    username: config.username,
-    password: config.password,
-    schema: [
-    {
-        measurement: config.measurement,
-        fields: {
-          count: Influx.FieldType.FLOAT,
-          doors: Influx.FieldType.BOOLEAN,
-          lat: Influx.FieldType.FLOAT,
-          lon: Influx.FieldType.FLOAT
-        },
-        tags: [
-          'id'
-        ]
-    }
-    ]
-}
+const { Pool } = require('pg');
+const { influxConfig,psqlConfig } = require('./custom_config');
 
 const routes = async (fastify, options) => {
     fastify.get('/',async (req,res) => {
@@ -100,7 +73,7 @@ const routes = async (fastify, options) => {
     fastify.post('/gettoken', (req, res) => {
         const token = fastify.jwt.sign({
             id: req.body.user
-        })// id autobus, descrizione eventualmente altro
+        })// autobus data
         res.send({ token })
       })
 
@@ -111,12 +84,14 @@ const routes = async (fastify, options) => {
       {
         req.session.name = 'ENSOO';
         req.session.auth = 1;
-        res.redirect('/');
+        res.send({
+          name:req.session.name
+        });
       }
       else
         res.status(401).send();
       /*
-        const pool = new Pool(psqlconfig);
+        const pool = new Pool(psqlConfig);
         
         pool.query('SELECT id,username,password,salt,account_type FROM Account WHERE username=$1', [req.body.username])
         .then((result) =>{
@@ -149,7 +124,7 @@ const routes = async (fastify, options) => {
         .catch(err => res.status(500).send(err))*/
     });
     fastify.post('/register',async(req,res) => {
-        const pool = new Pool(psqlconfig);
+        const pool = new Pool(psqlConfig);
         let salt = bcrypt.genSaltSync(10);// generare il sale e salvarlo nel database
         let hash = bcrypt.hashSync(myPlaintextPassword, salt);// generare la password e salvarlo nel database
         
@@ -164,10 +139,10 @@ const routes = async (fastify, options) => {
     });
 
     fastify.post('/logout',async(req,res) => {
-        if (request.session.authenticated) {
+        if (request.session.name) {
             request.sessionStore.destroy(request.session.sessionId, (err) => {
               if (err) {
-                res.status(500).send('Internal Server Error')
+                res.status(500).send(err)
               } else {
                 request.session = null
                 res.redirect('/')// logout effettuato con successo

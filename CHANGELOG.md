@@ -7,10 +7,16 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - PSQL tables with hours of service
-- Websocket implementation for get real time position of the bus
+- Upgraded HTTP into HTTPS and WS into WSS
 
 ### Changed
 - Bug solve in movements in C#
+
+## 2019-11-05
+### Added
+- Websocket implementation for get real time position of the bus
+
+### Changed
 
 # 2019-10-29
 ### Added

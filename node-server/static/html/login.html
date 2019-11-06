@@ -4,11 +4,8 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
-  <meta name="description" content="">
-  <meta name="generator" content="Jekyll v3.8.5">
   <title>Benvenuti nel portale di autenticazione</title>
 
-  <link rel="canonical" href="https://getbootstrap.com/docs/4.3/examples/jumbotron/">
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
 
@@ -62,8 +59,8 @@
           <a class="nav-link dropdown-toggle" href="#" id="dropdown01" data-toggle="dropdown" aria-haspopup="true"
             aria-expanded="false">Account</a>
           <div class="dropdown-menu" aria-labelledby="dropdown01">
-            <a class="dropdown-item" href="login.html">Accedi</a>
-            <a class="dropdown-item" href="registrazione.html">Registrati</a>
+            <a id='loginlink' class="dropdown-item" href="login.html">Accedi</a>
+            <a id='registerlink' class="dropdown-item" href="registrazione.html">Registrati</a>
           </div>
         </li>
         <li class="nav-item">
@@ -83,11 +80,11 @@
     <div id="error"></div>
     <p class="mt-5 mb-3 text-muted">&copy; 2019-2020</p>
   </form>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/jquery/3.4.1/jquery.min.js"></script>
-  <script src="https://cdnjs.cloudflare.com/ajax/libs/js-sha512/0.8.0/sha512.min.js"></script>
-  <script src="js/login.js"></script>
   <!-- Collegamenti agli script -->
-  <script src="script_bootstrap/bootstrap.js"></script>
+  <script src="js/sha512.min.js"></script>
+  <script src='js/script_bootstrap/jquery.min.js'></script>
+  <script src='js/script_bootstrap/bootstrap.min.js'></script>
+  <script src="js/login.js"></script>
 </body>
 
 </html>
