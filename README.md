@@ -47,7 +47,7 @@ C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe .\readersender\DataReader\
 C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe .\readersender\DataSender\Program.cs
 ```
 
-Go to http://localhost, do login and move on maps page. Then choose your bus to know his real-time position.
+Go to https://localhost, do login and move on maps page. Then choose your bus to know his real-time position.
 
 ![Screenshot of maps page](./node-server/static/html/images/screen_mappa.jpg)
 
@@ -59,7 +59,7 @@ It's important to test API calls and correct insert of data
 
 Test a connection to DB (a correct response returns code 204)
 ```
-curl http://localhost/ping
+curl https://localhost/ping
 ```
 
 ## Deployment

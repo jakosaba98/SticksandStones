@@ -1,21 +1,21 @@
 {
     "name": "server_trasporto_pubblico",
     "description": "Server che risponde a tutte le chiamate http API e del sito",
-    "authors": "S&S - Stick And Stones",
-    "version": "1.1.0",
+    "author": "S&S - Stick And Stones <sticksandstones@sas.it>",
+    "version": "1.1.1",
     "scripts": {
         "start": "node services/server.js"
     },
     "dependencies": {
-        "bcryptjs": "^2.4.3",
-        "fastify": "^2.3.0",
-        "fastify-cookie": "^3.0.2",
-        "fastify-jwt": "^0.10.0",
-        "fastify-session": "^3.0.0",
-        "fastify-static": "^2.4.0",
-        "fastify-websocket": "^0.6.0",
-        "influx": "^5.4.2",
-        "pg": "^7.11.0"
+        "bcryptjs": "2.4.3",
+        "fastify": "2.4.1",
+        "fastify-cookie": "3.0.2",
+        "fastify-jwt": "0.10.0",
+        "fastify-session": "3.0.0",
+        "fastify-static": "2.4.0",
+        "fastify-websocket": "0.6.0",
+        "influx": "5.4.2",
+        "pg": "7.11.0"
     },
     "repository": {
         "type": "javascript",

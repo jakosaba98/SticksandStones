@@ -1,5 +1,12 @@
+const {readKey,readCert} = require('./functions')
 const fastify = require('fastify')({
-    ignoreTrailingSlash: true
+    ignoreTrailingSlash: true,
+    http2: true,
+    https: {
+      key: readKey(),
+      cert: readCert(),
+      passphrase: 'pass'
+    }
 });
 const fastifySession = require('fastify-session');
 const fastifyCookie = require('fastify-cookie');
