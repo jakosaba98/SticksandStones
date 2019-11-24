@@ -14,7 +14,7 @@
         "database": "dbsands"
     },
     "server":{
-        "port":80
+        "port":443
     },
     "ipaddress": "127.0.0.1"
 }

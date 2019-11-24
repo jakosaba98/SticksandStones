@@ -17,17 +17,26 @@ const routes = async (fastify, options) => {
     fastify.get('/', { websocket: true }, (connection, req) => {
         if(!interval)
             interval=setInterval(()=>{
-                const influx = new Influx.InfluxDB(influxConfig);
-                let timestamp=new Date().getTime()*1000000-refreshRate*1000000;
-                let queryString=`select *
-                                from ${config.measurement}
-                                where id = ${Influx.escape.stringLit(connection.socket.id)}`;
-                if(!isNaN(timestamp))
-                    queryString+=' and "time" > '+timestamp;
-                queryString+=' order by time desc';
-                influx.query(queryString)
-                    .then(results => connection.socket.send(results))
-                    .catch((err)=>console.log(err));//any better way to log this??
+                try{
+                    const influx = new Influx.InfluxDB(influxConfig);
+                    let timestamp=new Date().getTime()*1000000-refreshRate*1000000;
+                    let queryString=`select *
+                                    from ${config.measurement}
+                                    where id = ${Influx.escape.stringLit(connection.socket.id)}`;
+                    if(!isNaN(timestamp))
+                        queryString+=' and "time" > '+timestamp;
+                    queryString+=' order by time desc';
+                    influx.query(queryString)
+                        .then(results => connection.socket.send(results))
+                        .catch((err)=>console.log(err));//any better way to log this??
+                }
+                catch(e){
+                    try{
+                        connection.socket.send("Error on connection with database");
+                    }
+                    catch{}
+                    console.log(e);
+                }
             },refreshRate);
 
         connection.socket.on('message', id => {

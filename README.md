@@ -1,13 +1,29 @@
 # SticksandStones Repo for Project Work
 [Dashboard on Trello](https://trello.com/b/1Z6gDGxO/dam-ss)
+#
+[SticksandStones Repo for Project Work](#sticksandstones-repo-for-project-work)
+  - [Getting Started](#getting-started)
+  - [Prerequisites](#prerequisites)
+  - [Installation](#installation)
+    - [Windows Install Certificate](#windows)
+    - [Linux Install Certificate](#linux)
+    - [Mac OSX Install Certificate](#mac-osx)
+    - [Run the server](#run-the-server)
+    - [Run simulation of movements](#run-simulation-of-movements)
+  - [Running the tests](#running-the-tests)
+  - [Deployment](#deployment)
+  - [Built With](#built-with)
+  - [Versioning](#versioning)
+  - [Authors](#authors)
+  - [License](#license)
+  - [Important Notes](#important-notes)
 
-Here there are all files of this project
 
 ## Getting Started
 S&S is our new Startup created to analyze and improve the company's managment and keeping customer's benefit optimal.
 These instructions will get you a copy of the project up and running on your local machine for development and testing purposes. See deployment for notes on how to deploy the project on a live system.
 
-### Prerequisites
+## Prerequisites
 
 - A browser
 - ~~An Internet connection~~
@@ -23,7 +39,7 @@ To download the needed software follow these links from official sites:
 
 We don't guarantee that works with newer version that specified before. You can also download and run these applications on Docker containers.
 
-### Installing
+## Installation
 
 
 Download this repository and install node_modules
@@ -33,21 +49,37 @@ git clone https://github.com/jakosaba98/SticksandStones/
 npm install
 ```
 
-Run the server
+Before running the server we must install certificates (we created a self-signed certificate, so the CA root certificate is not trusted, for more details check [here](https://letsencrypt.org/docs/certificates-for-localhost/)).
+
+To do this you should open your terminal on the cloned folder with administrative privileges and run the following commands
+### Windows
+```
+certutil -addstore -f "Root" node-server\https\server.crt
+```
+### Linux
+```
+sudo cp ./node-server/https/server.crt /usr/local/share/ca-certificates/server.crt
+sudo update-ca-certificates
+```
+### Mac OSX
+```
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ./node-server/https/server.crt
+```
+#### Run the server
 
 ```
 cd node-server
 npm start
 ```
 
-Run simulation of movements
+#### Run simulation of movements
 
 ```
 C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe .\readersender\DataReader\Program.cs &
 C:\Windows\Microsoft.NET\Framework\v4.0.30319\csc.exe .\readersender\DataSender\Program.cs
 ```
 
-Go to http://localhost, do login and move on maps page. Then choose your bus to know his real-time position.
+Go to https://localhost, do login and move on maps page. Then choose your bus to know his real-time position.
 
 ![Screenshot of maps page](./node-server/static/html/images/screen_mappa.jpg)
 
@@ -59,7 +91,7 @@ It's important to test API calls and correct insert of data
 
 Test a connection to DB (a correct response returns code 204)
 ```
-curl http://localhost/ping
+curl https://localhost/ping
 ```
 
 ## Deployment
@@ -71,10 +103,6 @@ We will write a guide and publish the files needed and where to save them
 * ~~[AWS](https://aws.amazon.com) Amazon EC2, Load Balancer - Server where we store data and website~~
 * [Visual Studio Code](https://code.visualstudio.com/) - Framework used to write HTML, CSS, Javascript code
 * [Visual Studio 2019](https://visualstudio.microsoft.com/downloads/) - Framework used to write C# code for GPS simulators
-
-
-## Contributing
-
 
 ## Versioning
 

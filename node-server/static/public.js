@@ -19,8 +19,5 @@ const routes = async (fastify, options) => {
     fastify.get('/index.htm', async (req, res) => {
         res.redirect('/');
     })
-    fastify.get('/azienda.html', async (req, res) => {
-        res.sendFile('azienda.htm');
-    })
 }
 module.exports = routes;
