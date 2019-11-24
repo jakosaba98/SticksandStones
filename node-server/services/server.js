@@ -3,11 +3,13 @@ const fastify = require('fastify')({
     ignoreTrailingSlash: true,
     http2: true,
     https: {
+      allowHTTP1: true,
       key: readKey(),
       cert: readCert(),
       passphrase: 'pass'
     }
 });
+fastify.register(require('fastify-https-redirect'));
 const fastifySession = require('fastify-session');
 const fastifyCookie = require('fastify-cookie');
 const { serverConfig } = require('./custom_config');

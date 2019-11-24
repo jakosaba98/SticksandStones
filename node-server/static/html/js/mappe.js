@@ -7,7 +7,7 @@ const start = {
 };
 let busSocket = null;
 let token = null;
-let provider = new com.modestmaps.TemplatedLayer('http://tile.openstreetmap.org/{Z}/{X}/{Y}.png');
+let provider = new com.modestmaps.TemplatedLayer('https://tile.openstreetmap.org/{Z}/{X}/{Y}.png');
 let map = new com.modestmaps.Map('map', provider);
 let canvas = document.createElement('canvas');
 canvas.style.position = 'absolute';
@@ -39,7 +39,7 @@ async function init(id) {
     busSocket.send(id);
   }
   else {
-    busSocket = new WebSocket("ws://localhost/bus?token=" + token);
+    busSocket = new WebSocket("wss://localhost/bus?token=" + token);
     busSocket.addEventListener('open', function (event) {
       busSocket.send(id);
     });
@@ -54,7 +54,7 @@ async function init(id) {
 getToken = async () => {
   return new Promise((resolve, reject) => {
     let xhr = new XMLHttpRequest();
-    xhr.open('GET', 'http://localhost/bus/gettoken', false);
+    xhr.open('GET', '/bus/gettoken', false);
     xhr.send();
     if (xhr.readyState === 4)
       try {

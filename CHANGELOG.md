@@ -7,10 +7,15 @@ and this project adheres to [Semantic Versioning](http://semver.org/).
 ## [Unreleased]
 ### Added
 - PSQL tables with hours of service
-- Upgraded HTTP into HTTPS and WS into WSS
 
 ### Changed
 - Bug solve in movements in C#
+
+## 2019-11-24
+### Added
+- Upgraded HTTP into HTTPS and WS into WSS
+
+### Changed
 
 ## 2019-11-05
 ### Added
