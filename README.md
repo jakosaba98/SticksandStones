@@ -33,6 +33,22 @@ git clone https://github.com/jakosaba98/SticksandStones/
 npm install
 ```
 
+Before running the server we must install certificates (we created a self-signed certificate, so the CA root certificate is not trusted, for more details check [here](https://letsencrypt.org/docs/certificates-for-localhost/)).
+
+To do this you should open your terminal on the cloned folder with administrative privileges and run the following commands
+### Windows
+```
+certutil -addstore -f "Root" node-server\https\server.crt
+```
+### Linux
+```
+sudo cp ./node-server/https/server.crt /usr/local/share/ca-certificates/server.crt
+sudo update-ca-certificates
+```
+### Mac OSX
+```
+sudo security add-trusted-cert -d -r trustRoot -k /Library/Keychains/System.keychain ./node-server/https/server.crt
+```
 Run the server
 
 ```
